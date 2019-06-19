@@ -11,7 +11,7 @@ since such systems depend on the how quickly a PDE system can
 be solved.
 
 ## Details/Installing the benchmark
-The code for this benchmark is taken from the open-source work done by
+The code for this benchmark is adapted from the open-source work done by
 Dr. John F. Gibson in an attempt to compare run-time performance between
 different programming languages, with the goal of legitimizing Julia as
 having the potential to be among the fastest languages, if used correctly.
