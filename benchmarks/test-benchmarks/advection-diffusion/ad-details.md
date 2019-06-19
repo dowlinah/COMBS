@@ -7,9 +7,14 @@ biological species in a flowing medium such as water or air."
 differential equations (PDEs), an algorithm that models a simpler, 1D aspect
 of advection-diffusion can be useful in measuring simulation performance.
 
-## Running the benchmark
+## Compiling and running the benchmark
+Compile:
 ```
 clang -O3 -o heat-c heat.c
+```
+Run:
+```
+./heat-c
 ```
 
 ## Citations
