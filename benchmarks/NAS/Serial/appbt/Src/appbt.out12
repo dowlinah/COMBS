@@ -1,0 +1,59 @@
+       Initial Residual Norms
+ 
+ 
+ RMS-norm of steady-state residual for first pde  =  6.78774E+04
+ RMS-norm of steady-state residual for second pde =  6.86567E+03
+ RMS-norm of steady-state residual for third pde  =  1.73739E+04
+ RMS-norm of steady-state residual for fourth pde =  1.46532E+04
+ RMS-norm of steady-state residual for fifth pde  =  9.76824E+04
+ 
+     pseudo-time Block ADI iteration no.=  60
+
+ 
+ RMS-norm of Block ADI-iteration correction for first pde  =  1.18096E-04
+ RMS-norm of Block ADI-iteration correction for second pde =  1.10065E-05
+ RMS-norm of Block ADI-iteration correction for third pde  =  1.79070E-05
+ RMS-norm of Block ADI-iteration correction for fourth pde =  1.79463E-05
+ RMS-norm of Block ADI-iteration correction for fifth pde  =  2.22567E-04
+ 
+ RMS-norm of steady-state residual for first pde  =  1.70343E-01
+ RMS-norm of steady-state residual for second pde =  1.29753E-02
+ RMS-norm of steady-state residual for third pde  =  3.25279E-02
+ RMS-norm of steady-state residual for fourth pde =  2.64364E-02
+ RMS-norm of steady-state residual for fifth pde  =  1.92118E-01
+ 
+ RMS-norm of error in soln. to first pde  =  4.99769E-04
+ RMS-norm of error in soln. to second pde =  4.51957E-05
+ RMS-norm of error in soln. to third pde  =  7.39738E-05
+ RMS-norm of error in soln. to fourth pde =  7.38212E-05
+ RMS-norm of error in soln. to fifth pde  =  8.92696E-04
+
+
+     surface integral =  7.84143E+00
+
+
+
+     VERIFICATION TEST FOR RESIDUALS IS SUCCESSFUL
+
+     VERIFICATION TEST FOR SOLUTION ERRORS IS SUCCESSFUL
+
+     VERIFICATION TEST FOR SURFACE INTEGRAL IS SUCCESSFUL
+
+
+          CAUTION
+
+     REFERENCE VALUES CURRENTLY IN THIS VERIFICATION ROUTINE 
+     ARE VALID ONLY FOR RUNS WITH THE FOLLOWING PARAMETER VALUES:
+
+     NX = 12;  NY = 12;  NZ = 12 
+
+     ITMAX = 60
+
+     DT = 1.0e-02
+
+     CHANGE IN ANY OF THE ABOVE VALUES RENDER THE REFERENCE VALUES 
+     INVALID AND CAUSES A FAILURE OF THE VERIFICATION TEST.
+
+
+      Total CPU time =   2.7385E+00 Sec.
+

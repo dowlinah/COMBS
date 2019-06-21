@@ -1,0 +1,23 @@
+***unit number for output data: iout
+6
+
+***controls printing of the progress of iterations: ipr   inorm
+1      60
+
+***the maximum no. of pseudo-time steps to be performed: itmax
+60
+
+***magnitude of the time step: dt
+1.0e-02
+
+***relaxation factor for SSOR iterations: omega
+1.2
+
+***tolerance levels for steady-state residuals: tolnwt(m),m=1,5
+1.0e-12   1.0e-12   1.0e-12  1.0e-12  1.0e-12 
+
+***number of grid points in xi and eta and zeta directions: nx   ny   nz
+12   12   12
+
+
+

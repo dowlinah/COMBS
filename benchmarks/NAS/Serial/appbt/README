@@ -1,0 +1,36 @@
+NAS CFD code: APPBT
+
+Original fortran version:
+
+Author: Sisira Weeratunga
+        NASA Ames Research Center
+        (10/25/90)
+
+This is the C version of the Fortran code developed at NASA Ames Research
+Center.  We converted the code to C as a part of our class project for
+CS 838-3/ChE 562  offered in Spring 1993 by Mark D. Hill, Sangtae Kim and
+Mary Vernon at the University of Wisconsin at Madison.  CS 838-3/ChE 562
+was an experimental course that brought computer scientists and computation
+scientists together to promote interdisciplinary research.
+
+You should have a NAS license for the original fortran code.  NASA has 
+given us permission to distribute our ``significant'' changes freely.  
+
+THIS SOFTWARE IS PROVIDED "AS IS".  WE MAKE NO WARRANTIES ABOUT ITS 
+CORRECTNESS OR PERFORMANCE.
+
+                                      July 20, 1993.
+
+				      Douglas C. Burger
+				      dburger@mysost.cs.wisc.edu
+                                      Department of Computer Sciences
+
+                                      Sanjay Mehta
+                                      sanjaym@luther.che.wisc.edu
+                                      Chemical Engineering Department
+
+                                      University of Wisconsin at Madison
+
+DISTRIBUTION:
+
+This distribution contains the serial C source code in Src/
