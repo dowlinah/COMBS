@@ -1,0 +1,3 @@
+#LID driven cavity using Finite-Difference-Method
+This is a simple finite difference method based code for solving Navier-Stokes equation in 2D LID driven cavity. 
+I wrote this code during the course work of my Master's degree as a minor project.
