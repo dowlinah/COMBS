@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+
+"""
+Plot solution
+"""
+
+import argparse
+import vtk
+from numpy import linspace
+
+parser = argparse.ArgumentParser(description='Generate picture.')
+parser.add_argument('--filename', dest='filename', default='',
+                   help='VTK file')
+parser.add_argument('--levels', dest='levels', default="linspace(0, 1., 5)",
+	               help='Contour levels')
+
+args = parser.parse_args()
+
+levels = eval(args.levels)
+
+lut = vtk.vtkLookupTable()
+reader = vtk.vtkRectilinearGridReader()
+cell2pt = vtk.vtkCellDataToPointData()
+contour = vtk.vtkContourFilter()
+mapper = vtk.vtkPolyDataMapper()
+actor = vtk.vtkActor()
+
+reader.SetFileName(args.filename)
+reader.Update()
+pdata = reader.GetOutput()
+cellData = pdata.GetCellData()
+fmin, fmax = cellData.GetArray(0).GetRange()
+print 'min/max field values: {0} {1}'.format(fmin, fmax)
+lut.SetTableRange(fmin, fmax)
+lut.SetNumberOfTableValues(3)
+lut.SetTableValue(0, ( 0., 0.,  1., 1.))  # blue
+lut.SetTableValue(1, (0.5, 1., 0.5, 1.))  # greenish
+lut.SetTableValue(2, ( 1., 0.,  0., 1.))  # red
+
+contour.SetNumberOfContours(len(levels))
+for i in range(len(levels)):
+    contour.SetValue(i, fmin + (fmax - fmin)*levels[i]);
+
+mapper.SetLookupTable(lut)
+
+# Connect
+cell2pt.SetInputConnection(reader.GetOutputPort())
+contour.SetInputConnection(cell2pt.GetOutputPort())
+mapper.SetInputConnection(contour.GetOutputPort())
+actor.SetMapper(mapper)
+
+mapper.Update()
+
+numScalars = reader.GetNumberOfScalarsInFile()
+for i in range(numScalars):
+    print 'scalar field: ', reader.GetScalarsNameInFile(i)
+
+# Create the renderer, the render window, and the interactor. The
+# renderer draws into the render window, the interactor enables mouse-
+# and keyboard-based interaction with the scene.
+ren = vtk.vtkRenderer()
+ren.AddActor(actor)
+ren.SetBackground(0.5, 0.5, 0.5)
+renWin = vtk.vtkRenderWindow()
+renWin.SetSize(600, 500)
+renWin.AddRenderer(ren)
+iren = vtk.vtkRenderWindowInteractor()
+iren.SetRenderWindow(renWin)
+# Interact with the data.
+iren.Initialize()
+renWin.Render()
+iren.Start()
