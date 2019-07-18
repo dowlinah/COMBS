@@ -1,0 +1,7 @@
+
+Reference Implementation of the FFT
+===================================
+
+The code in this directory is our reference FFT implementation that support arbitrary-precision FFT calculations.
+
+See ReferenceImplementation.h for details.
