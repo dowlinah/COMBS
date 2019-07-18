@@ -17,6 +17,6 @@ Run with the information given in the benchmark's repository.
 
 ## Citations
 [1] https://github.com/veitelser/phase-retrieval-benchmarks  
-[2] https://arxiv.org/pdf/1706.00399.pdf
+[2] https://arxiv.org/pdf/1706.00399.pdf  
 [3] https://en.wikipedia.org/wiki/Phase_problem  
 [4] http://micro.stanford.edu/wiki/Install_FFTW3  
