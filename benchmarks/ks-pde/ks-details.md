@@ -35,6 +35,6 @@ When running the output file, set Nx as a parameter:
 ```
 
 ## Citations
-[1] https://github.com/johnfgibson/julia-pde-benchmark
-[2] Hyman, J. M., & Nicolaenko, B. (1986). The Kuramoto-Sivashinsky equation: A bridge between PDES and dynamical systems. Physica D: Nonlinear Phenomena, 18(1-3), 113-126. doi:10.1016/0167-2789(86)90166-1
+[1] https://github.com/johnfgibson/julia-pde-benchmark  
+[2] Hyman, J. M., & Nicolaenko, B. (1986). The Kuramoto-Sivashinsky equation: A bridge between PDES and dynamical systems. Physica D: Nonlinear Phenomena, 18(1-3), 113-126. doi:10.1016/0167-2789(86)90166-1  
 [3] http://micro.stanford.edu/wiki/Install_FFTW3
