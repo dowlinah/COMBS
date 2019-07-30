@@ -42,7 +42,7 @@ This project was funded through NSF Award #1852102.
 [1] Binkert, N., Sardashti, S., Sen, R., Sewell, K., Shoaib, M., Vaish, N., . . . Krishna, T. (2011). The gem5 simulator. ACM SIGARCH Computer Architecture News,39(2), 1. doi:10.1145/2024716.2024718  
 [2] COMSOL Multiphysics Reference Manual, version 5.4", COMSOL, Inc, www.comsol.com  
 [3] CORAL-2 Benchmarks. (n.d.). Retrieved from https://asc.llnl.gov/coral-2-benchmarks/  
-[4] Turinsky, P. J. (2012). Advances In Multi-Physics And High Performance Computing In Support Of Nuclear Reactor Power Systems Modeling And Simulation. Nuclear Engineering and Technology,44(2), 103-122. doi:10.5516/net.01.2012.500
+[4] Turinsky, P. J. (2012). Advances In Multi-Physics And High Performance Computing In Support Of Nuclear Reactor Power Systems Modeling And Simulation. Nuclear Engineering and Technology,44(2), 103-122. doi:10.5516/net.01.2012.500  
 [5] Kan, D. (2008). Multiphysics Simulation Software. Retrieved from https://www.comsol.com/shared/downloads/multiphysics_white_paper.pdf  
 [6] Hyman, J. M., & Nicolaenko, B. (1986). The Kuramoto-Sivashinsky equation: A bridge between PDES and dynamical systems. Physica D: Nonlinear Phenomena, 18(1-3), 113-126. doi:10.1016/0167-2789(86)90166-1
 
