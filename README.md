@@ -1,4 +1,4 @@
-# Clarkson Open-Source Multi-physics Benchmarks (COMBS)
+# Clarkson Open-Source Multi-physics Benchmark Suite (COMBS)
 
 ## Abstract
 The lack of accessible open-source multi-physics benchmark suites has presented a challenge in uniformly evaluating simulation performance across related disciplines. Most of the available benchmarking tools require licensing and do not provide access to source codes, facilitating the need for a comprehensive suite of benchmarks to easily and reliably test simulation performance. Through the compilation of 14 benchmarks that measure performance indicative of multiple physics algorithm designs, research in the field will benefit from an open-source suite that is modifiable and free to use. The benchmark codes have been tested to successfully build on an Ubuntu server/packageable virtual environment, with the future goal of running the suite on a modular computer architecture simulator (i.e., gem5), allowing for codes to be run in a stable, uniform, virtual X86 environment.
