@@ -15,9 +15,9 @@ In order to construct a benchmark suite that would provide adequate coverage and
 * measures performance typical of an aspect of multiphysics simulations (ex: tightly coupled code)
 
 <p align = center>
-  <img src = figures/fig1.png>
+  <img src = https://github.com/fxswiatowicz/clarkson-reu-benchmarks/figures/fig1.png>
   </p>
-  
+    
 The last point was of particular importance, as it is difficult to determine the most salient aspects of a field with limited background experience in multiphysics algorithm design. Upon consulting literature in the field, it was determined that finding algorithms that solve partial differential equations (PDEs) was necessary, as multiphysics simulation solution times depend on how quickly PDEs can be solved [5]. Secondary characteristics used for the selection of benchmarks included their relatedness to the field in terms of the problem they solved or their presence in licensed benchmark suites. Queries were conducted primarily through GitHub.
 
 ## Results
