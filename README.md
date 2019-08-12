@@ -1,4 +1,13 @@
 # Clarkson Open-Source Multi-physics Benchmark Suite (COMBS)
+### Author Information
+Frank Swiatowicz<sup>1</sup>, Dr. Yu Liu<sup>2</sup>  
+<sup>1</sup> Department of Computer Science, Vassar College  
+fxswiatowicz@vassar.edu  
+<sup>2</sup> Department of Electrical and Computer Engineering, Clarkson University  
+yuliu@clarkson.edu
+
+
+### Download Links
 Download a Virtual Hard-disk (VHD) file containing the benchmarks [here!](https://drive.google.com/drive/folders/1vSfV_T9rR_I3zSm7IooAfSeW910G9HVt?usp=sharing)
 
 ## Abstract
