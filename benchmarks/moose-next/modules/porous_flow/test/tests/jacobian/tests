@@ -1,0 +1,1062 @@
+[Tests]
+  [./mass01]
+    type = 'PetscJacobianTester'
+    input = 'mass01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass02]
+    type = 'PetscJacobianTester'
+    input = 'mass02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass03]
+    type = 'PetscJacobianTester'
+    input = 'mass03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass04]
+    type = 'PetscJacobianTester'
+    input = 'mass04.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass05]
+    type = 'PetscJacobianTester'
+    input = 'mass05.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass06]
+    type = 'PetscJacobianTester'
+    input = 'mass06.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass07]
+    type = 'PetscJacobianTester'
+    input = 'mass07.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass08]
+    type = 'PetscJacobianTester'
+    input = 'mass08.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass09]
+    type = 'PetscJacobianTester'
+    input = 'mass09.i'
+    ratio_tol = 5E-6 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass10]
+    type = 'PetscJacobianTester'
+    input = 'mass10.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass01_fully_saturated]
+    type = 'PetscJacobianTester'
+    input = 'mass01_fully_saturated.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./fflux01]
+    type = 'PetscJacobianTester'
+    input = 'fflux01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux02]
+    type = 'PetscJacobianTester'
+    input = 'fflux02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux03]
+    type = 'PetscJacobianTester'
+    input = 'fflux03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux04]
+    type = 'PetscJacobianTester'
+    input = 'fflux04.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux05]
+    type = 'PetscJacobianTester'
+    input = 'fflux05.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux06]
+    type = 'PetscJacobianTester'
+    input = 'fflux06.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux07]
+    type = 'PetscJacobianTester'
+    input = 'fflux07.i'
+    ratio_tol = 1E-6 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux08]
+    type = 'PetscJacobianTester'
+    input = 'fflux08.i'
+    ratio_tol = 1E-7 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux09]
+    type = 'PetscJacobianTester'
+    input = 'fflux09.i'
+    ratio_tol = 1E-7 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux10]
+    type = 'PetscJacobianTester'
+    input = 'fflux10.i'
+    ratio_tol = 1E-7 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux11]
+    type = 'PetscJacobianTester'
+    input = 'fflux11.i'
+    ratio_tol = 1E-7 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux12]
+    type = 'PetscJacobianTester'
+    input = 'fflux12.i'
+    ratio_tol = 1E-7 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux13]
+    type = 'PetscJacobianTester'
+    input = 'fflux13.i'
+    ratio_tol = 1E-6 # lots of chain rules here
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./fflux01_fully_saturated]
+    type = 'PetscJacobianTester'
+    input = 'fflux01_fully_saturated.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./eff_stress01]
+    type = 'PetscJacobianTester'
+    input = 'eff_stress01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./eff_stress02]
+    type = 'PetscJacobianTester'
+    input = 'eff_stress02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./eff_stress03]
+    type = 'PetscJacobianTester'
+    input = 'eff_stress03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./eff_stress04]
+    type = 'PetscJacobianTester'
+    input = 'eff_stress04.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    skip = "#12506"
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass_vol_exp01]
+    type = 'PetscJacobianTester'
+    input = 'mass_vol_exp01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./mass_vol_exp02]
+    type = 'PetscJacobianTester'
+    input = 'mass_vol_exp02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./pls01]
+    type = 'PetscJacobianTester'
+    input = 'pls01.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./pls02]
+    type = 'PetscJacobianTester'
+    input = 'pls02.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./pls03]
+    type = 'PetscJacobianTester'
+    input = 'pls03.i'
+    ratio_tol = 1E-6
+    cli_args = 'Executioner/num_steps=1'
+    difference_tol = 1E10
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./pls04]
+    type = 'PetscJacobianTester'
+    input = 'pls04.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./hgs01]
+    type = 'PetscJacobianTester'
+    input = 'hgs01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./hcs01]
+    type = 'PetscJacobianTester'
+    input = 'hcs01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./hcs02]
+    type = 'PetscJacobianTester'
+    input = 'hcs02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./hcond01]
+    type = 'PetscJacobianTester'
+    input = 'hcond01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./hcond02]
+    type = 'PetscJacobianTester'
+    input = 'hcond02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./denergy01]
+    type = 'PetscJacobianTester'
+    input = 'denergy01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./denergy02]
+    type = 'PetscJacobianTester'
+    input = 'denergy02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./denergy03]
+    type = 'PetscJacobianTester'
+    input = 'denergy03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./denergy04]
+    type = 'PetscJacobianTester'
+    input = 'denergy04.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./denergy05]
+    type = 'PetscJacobianTester'
+    input = 'denergy05.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./heat_advection01]
+    type = 'PetscJacobianTester'
+    input = 'heat_advection01.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./heat_advection02]
+    type = 'PetscJacobianTester'
+    input = 'heat_advection02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./heat_advection01_fully_saturated]
+    type = 'PetscJacobianTester'
+    input = 'heat_advection01_fully_saturated.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./diff01]
+    type = 'PetscJacobianTester'
+    input = 'diff01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./diff02]
+    type = 'PetscJacobianTester'
+    input = 'diff02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./diff03]
+    type = 'PetscJacobianTester'
+    input = 'diff03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./disp01]
+    type = 'PetscJacobianTester'
+    input = 'disp01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./disp02]
+    type = 'PetscJacobianTester'
+    input = 'disp02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./disp03]
+    type = 'PetscJacobianTester'
+    input = 'disp03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./disp04]
+    type = 'PetscJacobianTester'
+    input = 'disp04.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./heat_vol_exp01]
+    type = 'PetscJacobianTester'
+    input = 'heat_vol_exp01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./phe01]
+    type = 'PetscJacobianTester'
+    input = 'phe01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./line_sink01]
+    type = 'PetscJacobianTester'
+    input = 'line_sink01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./line_sink02]
+    type = 'PetscJacobianTester'
+    input = 'line_sink02.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./line_sink03]
+    type = 'PetscJacobianTester'
+    input = 'line_sink03.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845 #10471'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./line_sink01_5]
+    type = 'PetscJacobianTester'
+    input = 'line_sink01.i'
+    cli_args = 'DiracKernels/dirac4/point_file=five_points.bh DiracKernels/dirac5/point_file=five_points.bh DiracKernels/dirac6/point_file=five_points.bh Executioner/num_steps=1'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./line_sink02_5]
+    type = 'PetscJacobianTester'
+    input = 'line_sink02.i'
+    cli_args = 'DiracKernels/dirac4/point_file=five_points.bh DiracKernels/dirac5/point_file=five_points.bh DiracKernels/dirac6/point_file=five_points.bh Executioner/num_steps=1'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./line_sink04]
+    type = 'PetscJacobianTester'
+    input = 'line_sink04.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845 #10471'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./desorped_mass01]
+    type = 'PetscJacobianTester'
+    input = 'desorped_mass01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./desorped_mass_vol_exp01]
+    type = 'PetscJacobianTester'
+    input = 'desorped_mass_vol_exp01.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./waterncg_twophase]
+    type = 'PetscJacobianTester'
+    input = 'waterncg_twophase.i'
+    ratio_tol = 1e-6 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./waterncg_liqiud]
+    type = 'PetscJacobianTester'
+    input = 'waterncg_liquid.i'
+    ratio_tol = 1e-6
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./waterncg_gas]
+    type = 'PetscJacobianTester'
+    input = 'waterncg_gas.i'
+    ratio_tol = 1e-6 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./brineco2_twophase]
+    type = 'PetscJacobianTester'
+    input = 'brineco2_twophase.i'
+    ratio_tol = 1e-6 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./brineco2_liquid]
+    type = 'PetscJacobianTester'
+    input = 'brineco2_liquid.i'
+    ratio_tol = 1e-6 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./brineco2_gas]
+    type = 'PetscJacobianTester'
+    input = 'brineco2_gas.i'
+    ratio_tol = 1e-6 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./brineco2_twophase_2]
+    type = 'PetscJacobianTester'
+    input = 'brineco2_twophase_2.i'
+    ratio_tol = 1e-5 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./brineco2_liquid_2]
+    type = 'PetscJacobianTester'
+    input = 'brineco2_liquid_2.i'
+    ratio_tol = 1e-6 # Lots of chain rule derivatives
+    difference_tol = 1e10
+    cli_args = '-mat_fd_type ds Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./exponential_decay]
+    type = 'PetscJacobianTester'
+    input = 'exponential_decay.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./chem01]
+    type = 'PetscJacobianTester'
+    input = 'chem01.i'
+    ratio_tol = 1E-3 # lots of crazy chain rules
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem02]
+    type = 'PetscJacobianTester'
+    input = 'chem02.i'
+    ratio_tol = 1E-5 # lots of crazy chain rules
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem03]
+    type = 'PetscJacobianTester'
+    input = 'chem03.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem04]
+    type = 'PetscJacobianTester'
+    input = 'chem04.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem05]
+    type = 'PetscJacobianTester'
+    input = 'chem05.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem06]
+    type = 'PetscJacobianTester'
+    input = 'chem06.i'
+    ratio_tol = 1E-4
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem07]
+    type = 'PetscJacobianTester'
+    input = 'chem07.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem08]
+    type = 'PetscJacobianTester'
+    input = 'chem08.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem09]
+    type = 'PetscJacobianTester'
+    input = 'chem09.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem10]
+    type = 'PetscJacobianTester'
+    input = 'chem10.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem11]
+    type = 'PetscJacobianTester'
+    input = 'chem11.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem12]
+    type = 'PetscJacobianTester'
+    input = 'chem12.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem13]
+    type = 'PetscJacobianTester'
+    input = 'chem13.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem14]
+    type = 'PetscJacobianTester'
+    input = 'chem14.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./chem15]
+    type = 'PetscJacobianTester'
+    input = 'chem15.i'
+    ratio_tol = 1E-6
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+
+  [./basic_advection1]
+    type = 'PetscJacobianTester'
+    input = 'basic_advection1.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./basic_advection2]
+    type = 'PetscJacobianTester'
+    input = 'basic_advection2.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./basic_advection3]
+    type = 'PetscJacobianTester'
+    input = 'basic_advection3.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./basic_advection4]
+    type = 'PetscJacobianTester'
+    input = 'basic_advection4.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./basic_advection5]
+    type = 'PetscJacobianTester'
+    input = 'basic_advection5.i'
+    ratio_tol = 1E-7
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+  [./basic_advection6]
+    type = 'PetscJacobianTester'
+    input = 'basic_advection6.i'
+    ratio_tol = 1E-5
+    difference_tol = 1E10
+    cli_args = 'Executioner/num_steps=1'
+    threading = '!pthreads'
+    requirement = "PorousFlow shall compute all Jacobian entries of all Kernels"
+    issues = '#6845'
+    design = 'porous_flow/tutorial_09.md porous_flow/tutorial_02.md porous_flow/solvers.md porous_flow/nonlinear_convergence_problems.md PorousFlowDictator.md'
+  [../]
+[]

@@ -1,0 +1,20 @@
+Content:
+    framework:
+        root_dir: framework/doc/content
+        content:
+            - contrib/**
+            - css/**
+            - js/**
+            - media/**
+    richards:
+        root_dir: modules/richards/doc/content
+
+Renderer:
+    type: MooseDocs.base.MaterializeRenderer
+    name: MOOSE Richards Module
+    repo: https://github.com/idaholab/moose
+    home: /modules/richards
+
+Extensions:
+    MooseDocs.extensions.appsyntax:
+        active: False

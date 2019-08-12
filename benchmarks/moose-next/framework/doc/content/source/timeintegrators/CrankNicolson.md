@@ -1,0 +1,1 @@
+!template load file=stubs/moose_object.md.template name=CrankNicolson syntax=/Executioner/TimeIntegrator/CrankNicolson

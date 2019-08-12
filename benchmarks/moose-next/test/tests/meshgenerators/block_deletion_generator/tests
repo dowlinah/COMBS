@@ -1,0 +1,11 @@
+[Tests]
+  [./block_deletion_test]
+    type = 'Exodiff'
+    input = 'block_deletion_test1.i'
+    exodiff = 'block_deletion_test1_out.e'
+    requirement = 'MOOSE shall be able to create different subdomains.'
+    design = 'meshgenerators/BlockDeletionGenerator.md'
+    issues = '#11640'
+    recover = false
+  [../]
+[]

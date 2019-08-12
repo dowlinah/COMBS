@@ -1,0 +1,1 @@
+!template load file=stubs/moose_object.md.template name=LStableDirk3 syntax=/Executioner/TimeIntegrator/LStableDirk3

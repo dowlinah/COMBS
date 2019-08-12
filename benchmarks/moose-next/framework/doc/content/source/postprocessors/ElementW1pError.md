@@ -1,0 +1,1 @@
+!template load file=stubs/moose_object.md.template name=ElementW1pError syntax=/Postprocessors/ElementW1pError

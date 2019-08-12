@@ -1,0 +1,182 @@
+[Tests]
+  [./s01]
+    type = 'CSVDiff'
+    input = 's01.i'
+    csvdiff = 's01.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s02]
+    type = 'CSVDiff'
+    input = 's02.i'
+    csvdiff = 's02.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, when the source/sink strength is multiplied by the mobility'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s03]
+    type = 'CSVDiff'
+    input = 's03.i'
+    csvdiff = 's03.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, unsaturated flow, when the source/sink strength is multiplied by the relative permeability'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s04]
+    type = 'CSVDiff'
+    input = 's04.i'
+    csvdiff = 's04.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model source/sink boundary condition for single-phase, single-component flow, when the boundary flux is a piecewise-linear function of porepressure'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s05]
+    type = 'CSVDiff'
+    input = 's05.i'
+    csvdiff = 's05.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model source/sink boundary condition for single-phase, single-component flow, when the boundary flux is a half-gaussian function of porepressure'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s06]
+    type = 'CSVDiff'
+    input = 's06.i'
+    csvdiff = 's06.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model source/sink boundary condition for single-phase, single-component flow, when the boundary flux is a half-cubic function of porepressure'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s07]
+    type = 'CSVDiff'
+    input = 's07.i'
+    csvdiff = 's07.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, multi-component, fully-saturated flow'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s08]
+    type = 'CSVDiff'
+    input = 's08.i'
+    csvdiff = 's08.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for multi-phase, multi-component flow'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s09]
+    type = CSVDiff
+    input = s09.i
+    csvdiff = 's09_mf_0100.csv s09_mf_0050.csv s09_mf_0010.csv'
+    abs_zero = 1E-7
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition that holds porepressures fixed and extracts fluid components from boundaries at a rate prescribed by the flow within the model at the boundary - viz, the sink should behave like a free boundary'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s09_fully_saturated]
+    type = CSVDiff
+    input = s09_fully_saturated.i
+    csvdiff = 's09_fully_saturated_mf_0100.csv s09_fully_saturated_mf_0050.csv s09_fully_saturated_mf_0010.csv'
+    abs_zero = 1E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition that holds porepressures fixed and extracts fluid components from boundaries at a rate prescribed by the flow within the model at the boundary - viz, the sink should behave like a free boundary, and this feature shall be compatible with the fully-saturated formalism within PorousFlow'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+
+  [./s10_left]
+    type = Exodiff
+    input = s10.i
+    cli_args = 'BCs/flux/boundary=left Outputs/file_base=s10_left'
+    exodiff = s10_left.e
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, and the source/sink shall remove fluid from the correct node in a mesh: the left-side nodes in this case'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s10_right]
+    type = Exodiff
+    input = s10.i
+    cli_args = 'BCs/flux/boundary=right Outputs/file_base=s10_right'
+    exodiff = s10_right.e
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, and the source/sink shall remove fluid from the correct node in a mesh: the right-side nodes in this case'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s10_top]
+    type = Exodiff
+    input = s10.i
+    cli_args = 'BCs/flux/boundary=top Outputs/file_base=s10_top'
+    exodiff = s10_top.e
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, and the source/sink shall remove fluid from the correct node in a mesh: the top-side nodes in this case'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s10_bottom]
+    type = Exodiff
+    input = s10.i
+    cli_args = 'BCs/flux/boundary=bottom Outputs/file_base=s10_bottom'
+    exodiff = s10_bottom.e
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, and the source/sink shall remove fluid from the correct node in a mesh: the bottom-side nodes in this case'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s10_front]
+    type = Exodiff
+    input = s10.i
+    cli_args = 'BCs/flux/boundary=front Outputs/file_base=s10_front'
+    exodiff = s10_front.e
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, and the source/sink shall remove fluid from the correct node in a mesh: the front-side nodes in this case'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./s10_back]
+    type = Exodiff
+    input = s10.i
+    cli_args = 'BCs/flux/boundary=back Outputs/file_base=s10_back'
+    exodiff = s10_back.e
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition for single-phase, single-component, fully-saturated flow, and the source/sink shall remove fluid from the correct node in a mesh: the back-side nodes in this case'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./injection_production_eg]
+    type = 'CSVDiff'
+    input = 'injection_production_eg.i'
+    csvdiff = 'injection_production_eg_out_pps_0002.csv'
+    rel_err = 1.0E-5
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a free boundary condition for multi-phase, multi-component fluids, and a clear example showing how this is possible shall be given'
+    issues = '#7333'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+  [./PorousFlowPiecewiseLinearSink_BC_eg1]
+    type = 'CSVDiff'
+    input = 'PorousFlowPiecewiseLinearSink_BC_eg1.i'
+    csvdiff = 'PorousFlowPiecewiseLinearSink_BC_eg1_out.csv'
+    threading = '!pthreads'
+    requirement = 'PorousFlow shall be able to model a source/sink boundary condition, and a clear example showing how these boundary conditions can be used to fix porepressures shall be given'
+    issues = '#12769'
+    design = 'porous_flow/tests/sinks/sinks_tests.md porous_flow/boundaries.md porous_flow/doc/tests/sinks.tex'
+  [../]
+[]

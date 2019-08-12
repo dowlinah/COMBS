@@ -1,0 +1,19 @@
+Content:
+    framework:
+        root_dir: framework/doc/content
+        content:
+            - contrib/**
+            - css/**
+            - js/**
+    combined:
+        root_dir: modules/combined/doc/content
+
+Renderer:
+    type: MooseDocs.base.MaterializeRenderer
+    name: MOOSE Combined Module
+    repo: https://github.com/idaholab/moose
+    home: /modules/combined
+
+Extensions:
+    disable_defaults: True
+    MooseDocs.extensions.core: default

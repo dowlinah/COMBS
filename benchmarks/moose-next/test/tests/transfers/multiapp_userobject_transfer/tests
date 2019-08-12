@@ -1,0 +1,39 @@
+[Tests]
+  [./test]
+    type = 'Exodiff'
+    input = 'master.i'
+    exodiff = 'master_out.e master_out_sub_app0.e master_out_sub_app1.e'
+  [../]
+
+  [./tosub]
+    type = 'Exodiff'
+    input = 'tosub_master.i'
+    exodiff = 'tosub_master_out.e tosub_master_out_sub_app0.e tosub_master_out_sub_app1.e'
+  [../]
+
+  [./tosub_displaced]
+    type = 'Exodiff'
+    input = 'tosub_displaced_master.i'
+    exodiff = 'tosub_displaced_master_out.e tosub_displaced_master_out_sub_app0.e'
+  [../]
+
+  [./3d_1d]
+    type = 'Exodiff'
+    input = '3d_1d_master.i'
+    exodiff = '3d_1d_master_out.e 3d_1d_master_out_sub_app0.e'
+    recover = false
+  [../]
+
+  [./3d_1d_err]
+    type = 'RunException'
+    input = '3d_1d_master.i'
+    cli_args = 'Transfers/layered_transfer_from_sub_app/all_master_nodes_contained_in_sub_app=true'
+    expect_err = 'MultiAppUserObjectTransfer: Master element with centroid at'
+    prereq = 3d_1d
+
+    requirement = "MultiAppUserObjectTransfer shall generate an error if a master node/element is not"
+                  " contained within any sub application domains."
+    design = "MultiAppUserObjectTransfer.md"
+    issues = "#10313"
+  [../]
+[]

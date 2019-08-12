@@ -1,0 +1,24 @@
+[Tests]
+  issues = '#1736'
+  design = 'TransientMultiApp.md'
+
+  [group]
+    requirement = "The system shall support the execution of sub-applications:"
+
+    [dt_from_multi]
+      type = 'Exodiff'
+      input = 'dt_from_multi.i'
+      exodiff = 'dt_from_multi_out_sub_app0.e dt_from_multi_out_sub_app1.e dt_from_multi_out_sub_app2.e dt_from_multi_out_sub_app3.e'
+
+      detail = "with a time step governed by the sub-application and"
+    []
+
+    [dt_from_master]
+      type = 'Exodiff'
+      input = 'dt_from_master.i'
+      exodiff = 'dt_from_master_out_sub_app0.e dt_from_master_out_sub_app1.e dt_from_master_out_sub_app2.e dt_from_master_out_sub_app3.e'
+
+      detail = "with a time step governed by the master application."
+    []
+  []
+[]

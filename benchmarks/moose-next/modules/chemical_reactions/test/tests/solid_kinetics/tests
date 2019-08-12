@@ -1,0 +1,23 @@
+[Tests]
+  [./2species]
+    type = 'Exodiff'
+    input = '2species.i'
+    exodiff = '2species_out.e'
+  [../]
+  [./2species_without_action]
+    type = 'Exodiff'
+    input = '2species_without_action.i'
+    exodiff = '2species_out.e'
+    prereq = 2species
+  [../]
+  [./calcite_precipitation]
+    type = 'CSVDiff'
+    input = 'calcite_precipitation.i'
+    csvdiff = 'calcite_precipitation_out.csv'
+  [../]
+  [./calcite_dissolution]
+    type = 'CSVDiff'
+    input = 'calcite_dissolution.i'
+    csvdiff = 'calcite_dissolution_out.csv'
+  [../]
+[]

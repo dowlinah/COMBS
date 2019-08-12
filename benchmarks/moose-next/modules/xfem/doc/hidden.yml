@@ -1,0 +1,9 @@
+- /AuxKernels/XFEMCutPlaneAux
+- /AuxKernels/XFEMMarkerAux
+- /AuxKernels/XFEMVolFracAux
+- /Constraints/XFEMSingleVariableConstraint
+- /DiracKernels/XFEMPressure
+- /UserObjects/XFEMMarkerUserObject
+- /UserObjects/XFEMMaterialTensorMarkerUserObject
+- /XFEM
+- /XFEM/XFEMAction

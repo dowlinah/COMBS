@@ -1,0 +1,145 @@
+Content:
+    - modules/doc/content
+    - framework/doc/content
+    - modules/chemical_reactions/doc/content
+    - modules/contact/doc/content
+    - modules/fluid_properties/doc/content
+    - modules/functional_expansion_tools/doc/content
+    - modules/heat_conduction/doc/content
+    - modules/level_set/doc/content
+    - modules/misc/doc/content
+    - modules/navier_stokes/doc/content
+    - modules/phase_field/doc/content
+    - modules/porous_flow/doc/content
+    - modules/rdg/doc/content
+    - modules/richards/doc/content
+    - modules/solid_mechanics/doc/content
+    - modules/stochastic_tools/doc/content
+    - modules/tensor_mechanics/doc/content
+    - modules/xfem/doc/content
+Renderer:
+    type: MooseDocs.base.MaterializeRenderer
+    name: MOOSE
+    repo: https://github.com/idaholab/moose
+    home: https://www.mooseframework.org
+    favicon: media/moose.ico
+    google_analytics: True
+
+Extensions:
+    MooseDocs.extensions.navigation:
+        name: 'MOOSE'
+        repo: https://github.com/idaholab/moose
+        home: https://www.mooseframework.org
+        menu:
+            Getting Started: getting_started/index.md
+            Documentation: documentation.menu.md
+            Help: help.menu.md
+            News: newsletter/index.md
+            Citing MOOSE: citing.md
+    MooseDocs.extensions.bibtex:
+        duplicates:
+            - kim_phase-field_1999 # referenced in both Tensor Mechanics and Phase Field
+    MooseDocs.extensions.katex:
+        macros:
+            \pf: "\\frac{\\partial #1}{\\partial #2}"
+    MooseDocs.extensions.appsyntax: # WARNING: this must follow katex for doco pages to work
+        executable: ${MOOSE_DIR}/modules/combined
+        hide:
+            framework: !include framework/doc/hidden.yml
+            chemical_reactions: !include modules/chemical_reactions/doc/hidden.yml
+            #combined: !include modules/combined/doc/hidden.yml
+            contact: !include modules/contact/doc/hidden.yml
+            fluid_properties: !include modules/fluid_properties/doc/hidden.yml
+            #functional_expansion_tools: !include modules/functional_expansion_tools/doc/hidden.yml
+            heat_conduction: !include modules/heat_conduction/doc/hidden.yml
+            #level_set: !include modules/level_set/doc/hidden.yml
+            misc: !include modules/misc/doc/hidden.yml
+            navier_stokes: !include modules/navier_stokes/doc/hidden.yml
+            phase_field: !include modules/phase_field/doc/hidden.yml
+            porous_flow: !include modules/porous_flow/doc/hidden.yml
+            #rdg: !include modules/rdg/doc/hidden.yml
+            #richards: !include modules/richards/doc/hidden.yml
+            #solid_mechanics: !include modules/solid_mechanics/doc/hidden.yml
+            #stochastic_tools: !include modules/stochastic_tools/doc/hidden.yml
+            tensor_mechanics: !include modules/tensor_mechanics/doc/hidden.yml
+            xfem: !include modules/xfem/doc/hidden.yml
+        remove:
+            framework: !include framework/doc/remove.yml
+            #chemical_reactions: !include modules/chemical_reactions/doc/remove.yml
+            #combined: !include modules/combined/doc/remove.yml
+            #contact: !include modules/contact/doc/remove.yml
+            #fluid_properties: !include modules/fluid_properties/doc/remove.yml
+            #functional_expansion_tools: !include modules/functional_expansion_tools/doc/remove.yml
+            #heat_conduction: !include modules/heat_conduction/doc/remove.yml
+            #level_set: !include modules/level_set/doc/remove.yml
+            #misc: !include modules/misc/doc/remove.yml
+            #navier_stokes: !include modules/navier_stokes/doc/remove.yml
+            #phase_field: !include modules/phase_field/doc/remove.yml
+            #porous_flow: !include modules/porous_flow/doc/remove.yml
+            #rdg: !include modules/rdg/doc/remove.yml
+            richards: !include modules/richards/doc/remove.yml
+            solid_mechanics: !include modules/solid_mechanics/doc/remove.yml
+            stochastic_tools: !include modules/stochastic_tools/doc/remove.yml
+            #tensor_mechanics: !include modules/tensor_mechanics/doc/remove.yml
+            #xfem: !include modules/xfem/doc/remove.yml
+    MooseDocs.extensions.common:
+        shortcuts: !include framework/doc/globals.yml
+    MooseDocs.extensions.acronym:
+        acronyms: !include framework/doc/acronyms.yml
+    MooseDocs.extensions.content:
+        source_links:
+            action: source/actions/Action.md
+            actions: source/actions/Action.md
+            auxkernels: AuxKernels/index.md
+            bcs: syntax/BCs/index.md
+            constraints: syntax/Constraints/index.md
+            controls: syntax/Controls/index.md
+            dampers: syntax/Dampers/index.md
+            dgkernels: syntax/DGKernels/index.md
+            dirackernels: syntax/DiracKernels/index.md
+            distributions: syntax/Distributions/index.md
+            executioners: syntax/Executioner/index.md
+            functions: syntax/Functions/index.md
+            ics: syntax/ICs/index.md
+            indicators: syntax/Adaptivity/Indicators/index.md
+            interfacekernels: syntax/InterfaceKernels/index.md
+            interfaces: framework_development/interfaces/index.md
+            kernels: syntax/Kernels/index.md
+            markers: syntax/Adaptivity/Markers/index.md
+            materials: syntax/Materials/index.md
+            mesh: syntax/Mesh/index.md
+            meshgenerators: syntax/MeshGenerators/index.md
+            meshmodifiers: syntax/MeshModifiers/index.md
+            multiapps: syntax/MultiApps/index.md
+            nodalkernels: syntax/NodalKernels/index.md
+            outputs: syntax/Outputs/index.md
+            partitioner: syntax/Mesh/Partitioner/index.md
+            postprocessors: syntax/Postprocessors/index.md
+            preconditioners: syntax/Preconditioning/index.md
+            predictors: syntax/Executioner/Predictor/index.md
+            problems: syntax/Problem/index.md
+            restart: application_usage/restart_recover.md
+            samplers: syntax/Samplers/index.md
+            scalarkernels: syntax/ScalarKernels/index.md
+            splits: syntax/Preconditioning/index.md
+            timeintegrators: syntax/Executioner/TimeIntegrator/index.md
+            timesteppers: syntax/Executioner/TimeStepper/index.md
+            transfers: syntax/Transfers/index.md
+            userobject: syntax/UserObjects/index.md
+            userobjects: syntax/UserObjects/index.md
+            utils: framework_development/utils/index.md
+            variables: syntax/Variables/index.md
+            vectorpostprocessors: syntax/VectorPostprocessors/index.md
+    MooseDocs.extensions.civet:
+        repo: moose
+        owner: idaholab
+    MooseDocs.extensions.template:
+        active: True
+    MooseDocs.extensions.sqa:
+        active: True
+        categories:
+            framework: !include framework/doc/sqa_framework.yml
+            tensor_mechanics: !include modules/tensor_mechanics/doc/sqa_tensor_mechanics.yml
+        requirement-groups:
+            dgkernels: DGKernel Objects
+            interfacekernels: InterfaceKernel Objects

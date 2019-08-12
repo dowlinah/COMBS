@@ -1,0 +1,20 @@
+Content:
+    framework:
+        root_dir: framework/doc/content
+        content:
+            - contrib/**
+            - css/**
+            - js/**
+            - media/**
+    solid_mechanics:
+        root_dir: modules/solid_mechanics/doc/content
+
+Renderer:
+    type: MooseDocs.base.MaterializeRenderer
+    name: MOOSE Solid Mechanics Module
+    repo: https://github.com/idaholab/moose
+    home: /modules/solid_mechanics
+
+Extensions:
+    MooseDocs.extensions.appsyntax:
+        active: False

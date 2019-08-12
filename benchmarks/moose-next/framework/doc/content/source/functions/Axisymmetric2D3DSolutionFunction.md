@@ -1,0 +1,1 @@
+!template load file=stubs/moose_object.md.template name=Axisymmetric2D3DSolutionFunction syntax=/Functions/Axisymmetric2D3DSolutionFunction

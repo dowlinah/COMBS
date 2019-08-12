@@ -1,0 +1,37 @@
+Content:
+    - framework/doc/content
+    - test/doc/content
+Renderer:
+    type: MooseDocs.base.MaterializeRenderer
+    name: MooseTestApp
+    repo: https://github.com/idaholab/moose
+    home: /
+
+Extensions:
+    MooseDocs.extensions.navigation:
+        active: False
+    MooseDocs.extensions.appsyntax:
+        executable: ${MOOSE_DIR}/test
+        hide:
+            framework: !include framework/doc/hidden.yml
+        remove:
+            framework: !include framework/doc/remove.yml
+            moose_test: !include test/doc/remove.yml
+        includes:
+            - framework/include
+    MooseDocs.extensions.common:
+        shortcuts: !include framework/doc/globals.yml
+    MooseDocs.extensions.acronym:
+        acronyms: !include framework/doc/acronyms.yml
+    MooseDocs.extensions.civet:
+        repo: moose
+        owner: idaholab
+    MooseDocs.extensions.template:
+        active: True
+    MooseDocs.extensions.sqa:
+        active: True
+        categories:
+            framework: !include framework/doc/sqa_framework.yml
+        requirement-groups:
+            dgkernels: DGKernel Objects
+            interfacekernels: InterfaceKernel Objects

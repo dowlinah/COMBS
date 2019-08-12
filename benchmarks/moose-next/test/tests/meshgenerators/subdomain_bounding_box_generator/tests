@@ -1,0 +1,34 @@
+[Tests]
+  [./subdomain_bounding_box_generator_test]
+    type = 'Exodiff'
+    input = 'subdomain_bounding_box_generator_inside.i'
+    exodiff = 'subdomain_bounding_box_generator_inside_out.e'
+    requirement = 'MOOSE shall be able to use the BoundingBox class.'
+    design = 'meshgenerators/SubdomainBoundingBoxGenerator.md'
+    issues = '#11640'
+    mesh_mode = 'REPLICATED'
+    recover = false
+  [../]
+
+  [./subdomain_bounding_box_generator_outside_test]
+    type = 'Exodiff'
+    input = 'subdomain_bounding_box_generator_outside.i'
+    exodiff = 'subdomain_bounding_box_generator_outside_out.e'
+    requirement = 'MOOSE shall be able to use the BoundingBox class.'
+    design = 'meshgenerators/SubdomainBoundingBoxGenerator.md'
+    issues = '#11640'
+    mesh_mode = 'REPLICATED'
+    recover = false
+  [../]
+
+  [./oriented_subdomain_bounding_box_generator_test]
+    type = 'Exodiff'
+    input = 'oriented_subdomain_bounding_box_generator.i'
+    exodiff = 'oriented_subdomain_bounding_box_generator_out.e'
+    requirement = 'MOOSE shall be able to use the BoundingBox class.'
+    design = 'meshgenerators/SubdomainBoundingBoxGenerator.md'
+    issues = '#11640'
+    mesh_mode = 'REPLICATED'
+    recover = false
+  [../]
+[]
