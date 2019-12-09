@@ -1,26 +1,26 @@
 CFLAGS += -lm -pg
 MPICC = mpicc
-OMP = -mp
+OMP = -fopenmp
 
 all: serial openmp mpi
 
 serial: serial-2dheat.o
-	$(CC) $(CFLAGS) serial-2dheat.o -o serial-2dheat.x 
+	$(CC) serial-2dheat.o -o serial-2dheat.x $(CFLAGS)
 
 serial-2dheat.o: serial-2dheat.c 
-	$(CC) $(CFLAGS) -c serial-2dheat.c
+	$(CC) -c serial-2dheat.c $(CFLAGS)
 
 openmp: openmp-2dheat.o
-	$(CC) $(OMP) $(CFLAGS) openmp-2dheat.o -o openmp-2dheat.x 
+	$(CC) $(OMP) openmp-2dheat.o -o openmp-2dheat.x $(CFLAGS)
 
 openmp-2dheat.o: openmp-2dheat.c 
-	$(CC) $(CFLAGS) -c openmp-2dheat.c
+	$(CC) -c openmp-2dheat.c $(CFLAGS)
 
 mpi: mpi-2dheat.o
-	$(MPICC) $(CFLAGS) mpi-2dheat.o -o mpi-2dheat.x 
+	$(MPICC) mpi-2dheat.o -o mpi-2dheat.x $(CFLAGS)
 
 mpi-2dheat.o: mpi-2dheat.c 
-	$(MPICC) $(CFLAGS) -c mpi-2dheat.c
+	$(MPICC) -c mpi-2dheat.c $(CFLAGS)
 
 clean:
 	rm -rf *.o *.x 
