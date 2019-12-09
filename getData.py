@@ -27,7 +27,7 @@ for folder in folders:
 
     minutes = ""
     seconds = ""
-    for time in rawTimeData:
+    for time in rawTimeData[-3:]
         if 'real' in time:
             parts = time.split('\t')
             minutes = parts[1].split('m')[0]
@@ -56,7 +56,7 @@ for folder in folders:
         exit(1)
 
     memRaw = []
-    with open('mem.txt','r') as ifh:
+    with open(path+'mem.txt','r') as ifh:
         memRaw = ifh.readlines()
 
     # Store data
