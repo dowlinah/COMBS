@@ -16,4 +16,7 @@ make
 cd ..
 cd hpcg
 ./build.sh
+cd ..
+cd monte-carlo
+./build.sh
 cd ../..
