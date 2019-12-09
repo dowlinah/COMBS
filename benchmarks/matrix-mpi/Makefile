@@ -10,4 +10,4 @@ bench: $(PROG)
 	./bench.sh ./$(PROG)
 
 clean:
-	rm -f $(PROG) callgrind.out* time.txt
+	rm -f $(PROG) callgrind.out* time.txt massif.out mem.txt

@@ -8,7 +8,7 @@ folders = [ "matrix-mpi","phase-retrieval-benchmarks",
             "lid-driven-cavity","FourierBenchmarks",
             "hpcg" ]
 
-metaData = ['minutes','seconds','instructions']
+metaData = ['minutes','seconds','instructions','memory']
 data = dict()
 
 for folder in folders:
@@ -50,11 +50,21 @@ for folder in folders:
 
     count = sum([ int(x) for x in instructionCounts])/len(instructionCounts)
 
+    # GET INSTRUCTION DATA ##########################################
+    if not 'mem.txt' in files:
+        print("ERROR: no mem.txt in: " + folder)
+        exit(1)
+
+    memRaw = []
+    with open('mem.txt','r') as ifh:
+        memRaw = ifh.readlines()
+
     # Store data
     data[folder] = dict()
     data[folder]['minutes'] = minutes
     data[folder]['seconds'] = seconds
     data[folder]['instructions'] = count
+    data[folder]['memory'] = memRaw[0].split('\n')[0]
 
 for benchmark in data:
     for header in metaData:
