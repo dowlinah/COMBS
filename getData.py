@@ -6,7 +6,7 @@ import os
 base = 'benchmarks'
 folders = [ 
         "2d-heat"
-        ,"FourierBenchmarks"
+#        ,"FourierBenchmarks"
         ,"advection-diffusion"
         ,"fidibench"
         ,"hpcg" 
@@ -16,7 +16,7 @@ folders = [
         ,"monte-carlo"
         ,"phase-retrieval-benchmarks"
         ,"radix_sort"
-        ,"sombrero"
+#        ,"sombrero"
         ]
 
 metaData = ['minutes','seconds','instructions','memory']
@@ -98,7 +98,7 @@ with open('output.tex','w') as ofh:
     ofh.write("\\begin{tabular}{l|r|r|r|r}\n")
 
     ofh.write("\t & & \multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{|c|}{Max Memory} & \\\\ \n")
-    ofh.write("\t Benchmark & \multicolumn{1}{|c|}{Time(s)} & \multicolumn{1}{|c|}{Count(Millions)} & \multicolumn{1}{|c|}{Usage(kB)} & \multicolumn{1}{|c}{IPS} \\\\ \hline \n")
+    ofh.write("\t Benchmark & \multicolumn{1}{|c|}{Time(s)} & \multicolumn{1}{|c|}{Count(Millions)} & \multicolumn{1}{|c|}{Usage(kB)} & \multicolumn{1}{|c}{MIPS} \\\\ \hline \n")
 
     for benchmark in data:
         finalSeconds = (float(
@@ -122,7 +122,7 @@ with open('output.tex','w') as ofh:
                 finalSeconds,
                 float(data[benchmark]['instructions'])/1000000.0,
                 data[benchmark]['memory'],
-                data[benchmark]['ips']
+                data[benchmark]['ips']/1000000.0
             )
         )
 

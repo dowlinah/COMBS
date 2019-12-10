@@ -3,7 +3,7 @@
 #include <stdlib.h>
 void heat()
 {
-	int Nx = 1000;
+	int Nx = 10000;
 	int Nt = 1000000;
 	double D = 1.14;
 	double v = .85;

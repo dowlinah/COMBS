@@ -37,8 +37,8 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    
  */
 
-#define _WIDTH   50 
-#define _HEIGHT  50 
+#define _WIDTH   150
+#define _HEIGHT  150 
 #define H        1.0   
 #define _EPSILON 0.1 
 /* 

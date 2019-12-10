@@ -506,7 +506,7 @@ int main()
         SignalNoise,
     };
 
-    for (unsigned n = 1; n < 5; n *= 2)
+    for (unsigned n = 1; n < 2; n *= 2)
     {
         execute_tests_r2c_1d<fftw_traits<double>>(signal_options, flags_options, cache_options, n, repeats);
     }
