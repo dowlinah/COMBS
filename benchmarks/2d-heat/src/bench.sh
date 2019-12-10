@@ -1,7 +1,7 @@
 #!/bin/bash
 # (time mpirun -n 8 mpi-2dheat.x) |& tee ./time.txt
 # (time ./openmp-2dheat.x) |& tee -a ./time.txt
-(time ./serial-2dheat.x) |& tee -a ./time.txt
+(time ./serial-2dheat.x) |& tee ./time.txt
 
 # mpirun -n 8 valgrind --tool=callgrind ./mpi-2dheat.x
 # valgrind --tool=callgrind ./openmp-2dheat.x

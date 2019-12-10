@@ -16,4 +16,19 @@ make
 cd ..
 cd hpcg
 ./build.sh
+cd ..
+cd 2d-heat
+make
+cd ..
+cd sombrero/sombrero-master
+make
+cd ../..
+cd fidibench
+./build.sh
+cd ..
+cd radix_sort
+make
+cd ..
+cd monte-carlo
+./build.sh
 cd ../..
