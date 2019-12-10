@@ -21,7 +21,7 @@ cd monte-carlo
 ./clean.sh
 cd ..
 cd advection-diffusion
-make clean.sh
+make clean
 cd ..
 cd ks-pde
 make clean
