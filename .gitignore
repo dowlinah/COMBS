@@ -1,2 +1,2 @@
 #exclude moose
-/benchmarks/moose-next/*
+benchmarks/moose-next/*
