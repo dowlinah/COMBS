@@ -1,0 +1,13 @@
+Nx == 50000
+cputtime == 4.989617
+cputtime == 4.883043
+cputtime == 4.857172
+cputtime == 4.854763
+cputtime == 4.882713
+norm(u(0)) == 0.710672
+norm(u(T)) == 1.318796
+avgtime == 4.869423
+
+real	0m24.489s
+user	0m24.481s
+sys	0m0.008s

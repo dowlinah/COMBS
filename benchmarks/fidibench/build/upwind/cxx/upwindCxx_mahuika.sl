@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name=upwindCxx
+#SBATCH --time=00:10:00
+#SBATCH --mem-per-cpu=4096
+#SBATCH --ntasks=1
+#SBATCH --partition=bigmem
+#SBATCH --exclusive
+#SBATCH --hint=nomultithread    # don't use hyperthreading
+
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export OMP_PROC_BIND=true
+export OMP_PLACES=cores
+
+exe="/home/tolnaia/COMBS/benchmarks/fidibench/build/upwind/cxx/upwindCxx"
+time srun $exe -numCells 512 -numSteps 10
+

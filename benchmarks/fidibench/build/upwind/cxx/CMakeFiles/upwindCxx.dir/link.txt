@@ -1,0 +1,1 @@
+/opt/moose/mpich-3.3/gcc-9.2.0/bin/mpicxx    -fopenmp -fopenmp  -rdynamic CMakeFiles/upwindCxx.dir/upwind.cxx.o  -o upwindCxx ../../cxx/libfidibench.a 

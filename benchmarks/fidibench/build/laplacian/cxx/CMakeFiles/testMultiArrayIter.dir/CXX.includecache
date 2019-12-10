@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../cxx/MultiArrayIter.h
+vector
+-
+cstring
+-
+
+/home/tolnaia/COMBS/benchmarks/fidibench/laplacian/cxx/testMultiArrayIter.cxx
+vector
+-
+iostream
+-
+MultiArrayIter.h
+/home/tolnaia/COMBS/benchmarks/fidibench/laplacian/cxx/MultiArrayIter.h
+

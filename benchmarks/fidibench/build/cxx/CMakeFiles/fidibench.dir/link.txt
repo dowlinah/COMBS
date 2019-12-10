@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfidibench.a  CMakeFiles/fidibench.dir/CmdLineArgParser.cpp.o CMakeFiles/fidibench.dir/CubeDecomp.cpp.o CMakeFiles/fidibench.dir/Filter.cpp.o CMakeFiles/fidibench.dir/MultiArrayIter.cpp.o CMakeFiles/fidibench.dir/writeVTK.cpp.o
+/usr/bin/ranlib libfidibench.a

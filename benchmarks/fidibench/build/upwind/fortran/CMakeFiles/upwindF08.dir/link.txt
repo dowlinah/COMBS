@@ -1,0 +1,1 @@
+/opt/moose/mpich-3.3/gcc-9.2.0/bin/mpif90     -fopenmp CMakeFiles/upwindF08.dir/upwindF08.f90.o  -o upwindF08 

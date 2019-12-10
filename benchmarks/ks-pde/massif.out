@@ -1,0 +1,1086 @@
+desc: --pages-as-heap=yes --massif-out-file=massif.out
+cmd: ./ksbenchmark 50000
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=12288
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=0
+mem_heap_B=20480
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=0
+mem_heap_B=180224
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=0
+mem_heap_B=188416
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=0
+mem_heap_B=192512
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=0
+mem_heap_B=196608
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=0
+mem_heap_B=200704
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=0
+mem_heap_B=217088
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=0
+mem_heap_B=221184
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=0
+mem_heap_B=225280
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n2: 225280 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n1: 4096 0x400108F: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+  n1: 4096 0x0: ???
+   n1: 4096 0x1FFEFFF3AD: ???
+    n0: 4096 0x1FFEFFF3BB: ???
+#-----------
+snapshot=10
+#-----------
+time=0
+mem_heap_B=225280
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n2: 225280 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n1: 4096 0x400108F: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+  n1: 4096 0x0: ???
+   n1: 4096 0x1FFEFFF3AD: ???
+    n0: 4096 0x1FFEFFF3BB: ???
+#-----------
+snapshot=11
+#-----------
+time=0
+mem_heap_B=221184
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=0
+mem_heap_B=221184
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=47626
+mem_heap_B=229376
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=48262
+mem_heap_B=2334720
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=48375
+mem_heap_B=2342912
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=60215
+mem_heap_B=2478080
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=62915
+mem_heap_B=6680576
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=63028
+mem_heap_B=6754304
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=68285
+mem_heap_B=10547200
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=68398
+mem_heap_B=10555392
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n3: 10555392 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n3: 10334208 0x401CF42: mmap (mmap64.c:52)
+  n1: 10100736 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 10100736 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 7995392 0x400E310: openaux (dl-deps.c:63)
+     n1: 7995392 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 7995392 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 7995392 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 7995392 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 7995392 0x4002126: _dl_start (rtld.c:414)
+          n1: 7995392 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 7995392 0x0: ???
+            n1: 7995392 0x1FFEFFF3AD: ???
+             n0: 7995392 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n1: 135168 0x40114F3: _dl_sysdep_read_whole_file (dl-misc.c:57)
+   n1: 135168 0x4018366: _dl_load_cache_lookup (dl-cache.c:201)
+    n1: 135168 0x4009381: _dl_map_object (dl-load.c:2255)
+     n1: 135168 0x400E310: openaux (dl-deps.c:63)
+      n1: 135168 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+       n1: 135168 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+        n1: 135168 0x4003EA4: dl_main (rtld.c:1726)
+         n1: 135168 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 135168 0x4002126: _dl_start (rtld.c:414)
+           n1: 135168 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 135168 0x0: ???
+             n1: 135168 0x1FFEFFF3AD: ???
+              n0: 135168 0x1FFEFFF3BB: ???
+  n0: 98304 in 2 places, all below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=21
+#-----------
+time=74475
+mem_heap_B=14688256
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=74569
+mem_heap_B=14712832
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=74881
+mem_heap_B=14729216
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=88769
+mem_heap_B=14741504
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=305084
+mem_heap_B=14741504
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n3: 14741504 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14520320 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 286720 in 4 places, all below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=26
+#-----------
+time=305084
+mem_heap_B=14737408
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=374154
+mem_heap_B=14741504
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=377267
+mem_heap_B=15544320
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=377570
+mem_heap_B=16347136
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=22673533
+mem_heap_B=16547840
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=22673839
+mem_heap_B=17350656
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=22674142
+mem_heap_B=17752064
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=23579236
+mem_heap_B=18153472
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=23579539
+mem_heap_B=18554880
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=23842376
+mem_heap_B=19357696
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n4: 19357696 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14385152 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 151552 in 4 places, all below massif's threshold (1.00%)
+ n1: 4616192 0x54E7A12: mmap (mmap64.c:52)
+  n1: 4616192 0x54602AD: sysmalloc (malloc.c:2329)
+   n1: 4616192 0x5460FEE: _int_malloc (malloc.c:4125)
+    n8: 4616192 0x54630FA: malloc (malloc.c:3057)
+     n0: 802816 0x400A1A: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 802816 0x400A25: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x400EAF: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x401339: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x400EBC: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x4011A3: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x4011B0: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 200704 0x400E93: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 200704 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 135168 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=36
+#-----------
+time=25316817
+mem_heap_B=19517440
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=26741888
+mem_heap_B=19681280
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=27305909
+mem_heap_B=19681280
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n5: 19681280 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14385152 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 151552 in 4 places, all below massif's threshold (1.00%)
+ n1: 4780032 0x54E7A12: mmap (mmap64.c:52)
+  n1: 4780032 0x54602AD: sysmalloc (malloc.c:2329)
+   n2: 4780032 0x5460FEE: _int_malloc (malloc.c:4125)
+    n8: 4616192 0x54630FA: malloc (malloc.c:3057)
+     n0: 802816 0x400A1A: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 802816 0x400A25: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x400EAF: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x401339: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x400EBC: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x4011A3: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x4011B0: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 200704 0x400E93: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 200704 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+    n0: 163840 in 1 place, below massif's threshold (1.00%)
+ n1: 294912 0x54E24B8: brk (brk.c:31)
+  n1: 294912 0x54E258F: sbrk (sbrk.c:56)
+   n1: 294912 0x5467197: __default_morecore (morecore.c:47)
+    n1: 294912 0x545FDAA: sysmalloc (malloc.c:2489)
+     n1: 294912 0x5460FEE: _int_malloc (malloc.c:4125)
+      n0: 294912 in 2 places, all below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=39
+#-----------
+time=27305909
+mem_heap_B=19677184
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=27533858
+mem_heap_B=19664896
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=40456831
+mem_heap_B=19824640
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=42521579
+mem_heap_B=20148224
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=48608324
+mem_heap_B=20307968
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=55118989
+mem_heap_B=21110784
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=56119302
+mem_heap_B=21913600
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=34995317426
+mem_heap_B=21913600
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=peak
+n5: 21913600 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14385152 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 151552 in 4 places, all below massif's threshold (1.00%)
+ n1: 6545408 0x54E7A12: mmap (mmap64.c:52)
+  n1: 6545408 0x54602AD: sysmalloc (malloc.c:2329)
+   n2: 6545408 0x5460FEE: _int_malloc (malloc.c:4125)
+    n10: 6221824 0x54630FA: malloc (malloc.c:3057)
+     n0: 802816 0x400A1A: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 802816 0x400A25: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x400EAF: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x401339: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x40145E: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 802816 0x40151F: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 802816 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x400EBC: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x4011A3: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n1: 401408 0x4011B0: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 200704 in 1 place, below massif's threshold (1.00%)
+    n1: 323584 0x5465133: memalign (malloc.c:4694)
+     n2: 323584 0x4C4E4A3: fftw_malloc_plain (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+      n1: 323584 0x4C544A9: fftw_twiddle_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+       n1: 323584 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+        n1: 323584 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 323584 0x4D1F680: fftw_mkapiplan (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n1: 323584 0x4D22AE9: fftw_plan_many_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 323584 0x4D21E45: fftw_plan_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n1: 323584 0x4D21B44: fftw_plan_dft_1d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+             n1: 323584 0x4013E9: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+              n0: 323584 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 761856 0x54E24B8: brk (brk.c:31)
+  n1: 761856 0x54E258F: sbrk (sbrk.c:56)
+   n1: 761856 0x5467197: __default_morecore (morecore.c:47)
+    n1: 761856 0x545FDAA: sysmalloc (malloc.c:2489)
+     n2: 761856 0x5460FEE: _int_malloc (malloc.c:4125)
+      n1: 626688 0x5465133: memalign (malloc.c:4694)
+       n2: 626688 0x4C4E4A3: fftw_malloc_plain (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+        n0: 319488 in 2 places, all below massif's threshold (1.00%)
+        n1: 307200 0x4C55356: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 307200 0x4C50790: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n1: 307200 0x4C50997: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 307200 0x4C50F3D: fftw_mkplan_d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n0: 307200 in 2 places, all below massif's threshold (1.00%)
+      n0: 135168 in 1 place, below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=47
+#-----------
+time=34995317426
+mem_heap_B=21909504
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=34995323285
+mem_heap_B=21585920
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=34995323369
+mem_heap_B=21385216
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=34995323437
+mem_heap_B=20582400
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=34995323505
+mem_heap_B=20180992
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=34995323573
+mem_heap_B=19779584
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=34995323657
+mem_heap_B=19378176
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=34995323741
+mem_heap_B=18575360
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=34995323832
+mem_heap_B=17772544
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=34995480949
+mem_heap_B=17657856
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n5: 17657856 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14385152 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 151552 in 4 places, all below massif's threshold (1.00%)
+ n1: 1605632 0x54E7A12: mmap (mmap64.c:52)
+  n1: 1605632 0x54602AD: sysmalloc (malloc.c:2329)
+   n2: 1605632 0x5460FEE: _int_malloc (malloc.c:4125)
+    n3: 1605632 0x54630FA: malloc (malloc.c:3057)
+     n0: 802816 0x400A1A: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 802816 0x400A25: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 0 in 8 places, all below massif's threshold (1.00%)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 1445888 0x54E24B8: brk (brk.c:31)
+  n1: 1445888 0x54E258F: sbrk (sbrk.c:56)
+   n1: 1445888 0x5467197: __default_morecore (morecore.c:47)
+    n1: 1445888 0x545FDAA: sysmalloc (malloc.c:2489)
+     n3: 1445888 0x5460FEE: _int_malloc (malloc.c:4125)
+      n1: 684032 0x54630FA: malloc (malloc.c:3057)
+       n1: 684032 0x400EAF: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 684032 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+      n1: 626688 0x5465133: memalign (malloc.c:4694)
+       n2: 626688 0x4C4E4A3: fftw_malloc_plain (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+        n0: 319488 in 2 places, all below massif's threshold (1.00%)
+        n1: 307200 0x4C55356: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 307200 0x4C50790: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n1: 307200 0x4C50997: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 307200 0x4C50F3D: fftw_mkplan_d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n0: 307200 in 2 places, all below massif's threshold (1.00%)
+      n0: 135168 in 1 place, below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=57
+#-----------
+time=34995481318
+mem_heap_B=18059264
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=34996386478
+mem_heap_B=18456576
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=34996386847
+mem_heap_B=18857984
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=34996649750
+mem_heap_B=19656704
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=34998433315
+mem_heap_B=19816448
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=35000498399
+mem_heap_B=20135936
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=35010651855
+mem_heap_B=20942848
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=35011652234
+mem_heap_B=21745664
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=69928929892
+mem_heap_B=21741568
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=69944252861
+mem_heap_B=20971520
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n5: 20971520 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14385152 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 151552 in 4 places, all below massif's threshold (1.00%)
+ n1: 4759552 0x54E24B8: brk (brk.c:31)
+  n1: 4759552 0x54E258F: sbrk (sbrk.c:56)
+   n1: 4759552 0x5467197: __default_morecore (morecore.c:47)
+    n1: 4759552 0x545FDAA: sysmalloc (malloc.c:2489)
+     n3: 4759552 0x5460FEE: _int_malloc (malloc.c:4125)
+      n7: 3518464 0x54630FA: malloc (malloc.c:3057)
+       n1: 835584 0x40145E: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 835584 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 798720 0x401339: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 798720 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 684032 0x400EAF: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 684032 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 401408 0x400EBC: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 401408 0x4011B0: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 397312 0x4011A3: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 397312 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n0: 0 in 1 place, below massif's threshold (1.00%)
+      n1: 1105920 0x5465133: memalign (malloc.c:4694)
+       n3: 1105920 0x4C4E4A3: fftw_malloc_plain (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+        n1: 638976 0x4C544A9: fftw_twiddle_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 638976 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n2: 638976 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 319488 0x4C55862: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n1: 319488 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+             n1: 319488 0x4D1F680: fftw_mkapiplan (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+              n1: 319488 0x4D22AE9: fftw_plan_many_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+               n1: 319488 0x4D21E45: fftw_plan_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+                n1: 319488 0x4D21B44: fftw_plan_dft_1d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+                 n1: 319488 0x4013E9: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+                  n0: 319488 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+           n1: 319488 0x4D1F680: fftw_mkapiplan (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n1: 319488 0x4D22AE9: fftw_plan_many_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+             n1: 319488 0x4D21E45: fftw_plan_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+              n1: 319488 0x4D21B44: fftw_plan_dft_1d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+               n1: 319488 0x4013E9: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+                n0: 319488 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n1: 307200 0x4C55356: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 307200 0x4C50790: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n1: 307200 0x4C50997: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 307200 0x4C50F3D: fftw_mkplan_d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n0: 307200 in 2 places, all below massif's threshold (1.00%)
+        n0: 159744 in 1 place, below massif's threshold (1.00%)
+      n0: 135168 in 1 place, below massif's threshold (1.00%)
+ n1: 1605632 0x54E7A12: mmap (mmap64.c:52)
+  n1: 1605632 0x54602AD: sysmalloc (malloc.c:2329)
+   n2: 1605632 0x5460FEE: _int_malloc (malloc.c:4125)
+    n3: 1605632 0x54630FA: malloc (malloc.c:3057)
+     n0: 802816 0x400A1A: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 802816 0x400A25: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 0 in 8 places, all below massif's threshold (1.00%)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=67
+#-----------
+time=69945253239
+mem_heap_B=21770240
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=104862850726
+mem_heap_B=21766144
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=104878178116
+mem_heap_B=20975616
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=104879178494
+mem_heap_B=21774336
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=139796776230
+mem_heap_B=21770240
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=139812104445
+mem_heap_B=20975616
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=139813104823
+mem_heap_B=21778432
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=174730702442
+mem_heap_B=21774336
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=174739314153
+mem_heap_B=20131840
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=174739314237
+mem_heap_B=19329024
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=detailed
+n5: 19329024 (page allocation syscalls) mmap/mremap/brk, --alloc-fns, etc.
+ n2: 14385152 0x401CF42: mmap (mmap64.c:52)
+  n1: 14233600 0x4006D67: _dl_map_object_from_fd (dl-map-segments.h:56)
+   n2: 14233600 0x4008FFA: _dl_map_object (dl-load.c:2389)
+    n1: 12128256 0x400E310: openaux (dl-deps.c:63)
+     n1: 12128256 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 12128256 0x400E616: _dl_map_object_deps (dl-deps.c:249)
+       n1: 12128256 0x4003EA4: dl_main (rtld.c:1726)
+        n1: 12128256 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+         n1: 12128256 0x4002126: _dl_start (rtld.c:414)
+          n1: 12128256 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+           n1: 12128256 0x0: ???
+            n1: 12128256 0x1FFEFFF3AD: ???
+             n0: 12128256 0x1FFEFFF3BB: ???
+    n1: 2105344 0x4001303: map_doit (rtld.c:591)
+     n1: 2105344 0x401BC69: _dl_catch_exception (dl-error-skeleton.c:196)
+      n1: 2105344 0x401BCDD: _dl_catch_error (dl-error-skeleton.c:215)
+       n1: 2105344 0x4002566: handle_ld_preload (rtld.c:762)
+        n1: 2105344 0x4003E33: dl_main (rtld.c:1618)
+         n1: 2105344 0x401ADCE: _dl_sysdep_start (dl-sysdep.c:253)
+          n1: 2105344 0x4002126: _dl_start (rtld.c:414)
+           n1: 2105344 0x4001096: ??? (in /lib/x86_64-linux-gnu/ld-2.27.so)
+            n1: 2105344 0x0: ???
+             n1: 2105344 0x1FFEFFF3AD: ???
+              n0: 2105344 0x1FFEFFF3BB: ???
+  n0: 151552 in 4 places, all below massif's threshold (1.00%)
+ n1: 3923968 0x54E24B8: brk (brk.c:31)
+  n1: 3923968 0x54E258F: sbrk (sbrk.c:56)
+   n1: 3923968 0x5467197: __default_morecore (morecore.c:47)
+    n1: 3923968 0x545FDAA: sysmalloc (malloc.c:2489)
+     n3: 3923968 0x5460FEE: _int_malloc (malloc.c:4125)
+      n6: 2682880 0x54630FA: malloc (malloc.c:3057)
+       n1: 798720 0x401339: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 798720 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 684032 0x400EAF: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 684032 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 401408 0x400EBC: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 401408 0x4011B0: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 401408 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n1: 397312 0x4011A3: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n0: 397312 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+       n0: 0 in 2 places, all below massif's threshold (1.00%)
+      n1: 1105920 0x5465133: memalign (malloc.c:4694)
+       n3: 1105920 0x4C4E4A3: fftw_malloc_plain (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+        n1: 638976 0x4C544A9: fftw_twiddle_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 638976 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n2: 638976 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 319488 0x4C55862: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n1: 319488 0x4C4F6B4: fftw_plan_awake (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+             n1: 319488 0x4D1F680: fftw_mkapiplan (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+              n1: 319488 0x4D22AE9: fftw_plan_many_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+               n1: 319488 0x4D21E45: fftw_plan_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+                n1: 319488 0x4D21B44: fftw_plan_dft_1d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+                 n1: 319488 0x4013E9: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+                  n0: 319488 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+           n1: 319488 0x4D1F680: fftw_mkapiplan (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n1: 319488 0x4D22AE9: fftw_plan_many_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+             n1: 319488 0x4D21E45: fftw_plan_dft (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+              n1: 319488 0x4D21B44: fftw_plan_dft_1d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+               n1: 319488 0x4013E9: ksintegrate (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+                n0: 319488 0x400BFD: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+        n1: 307200 0x4C55356: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+         n1: 307200 0x4C50790: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+          n1: 307200 0x4C50997: ??? (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+           n1: 307200 0x4C50F3D: fftw_mkplan_d (in /usr/lib/x86_64-linux-gnu/libfftw3.so.3.5.7)
+            n0: 307200 in 2 places, all below massif's threshold (1.00%)
+        n0: 159744 in 1 place, below massif's threshold (1.00%)
+      n0: 135168 in 1 place, below massif's threshold (1.00%)
+ n1: 798720 0x54E7A12: mmap (mmap64.c:52)
+  n1: 798720 0x54602AD: sysmalloc (malloc.c:2329)
+   n2: 798720 0x5460FEE: _int_malloc (malloc.c:4125)
+    n2: 798720 0x54630FA: malloc (malloc.c:3057)
+     n0: 798720 0x400A25: main (in /home/tolnaia/COMBS/benchmarks/ks-pde/ksbenchmark)
+     n0: 0 in 9 places, all below massif's threshold (1.00%)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n0: 221184 0xFFFFFFFFFFFFFFFF: ???
+ n0: 0 in 1 place, below massif's threshold (1.00%)

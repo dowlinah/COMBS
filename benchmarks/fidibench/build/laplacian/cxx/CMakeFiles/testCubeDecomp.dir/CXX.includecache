@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../cxx/CubeDecomp.h
+vector
+-
+map
+-
+numeric
+-
+limits
+-
+functional
+-
+MultiArrayIter.h
+../cxx/MultiArrayIter.h
+
+../cxx/MultiArrayIter.h
+vector
+-
+cstring
+-
+
+/home/tolnaia/COMBS/benchmarks/fidibench/laplacian/cxx/testCubeDecomp.cxx
+vector
+-
+iostream
+-
+CubeDecomp.h
+/home/tolnaia/COMBS/benchmarks/fidibench/laplacian/cxx/CubeDecomp.h
+

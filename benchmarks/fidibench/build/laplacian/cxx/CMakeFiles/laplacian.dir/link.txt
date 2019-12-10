@@ -1,0 +1,1 @@
+/opt/moose/mpich-3.3/gcc-9.2.0/bin/mpicxx    -fopenmp  -rdynamic CMakeFiles/laplacian.dir/laplacian.cxx.o  -o laplacian ../../cxx/libfidibench.a 

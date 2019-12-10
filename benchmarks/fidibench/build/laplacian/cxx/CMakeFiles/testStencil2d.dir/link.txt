@@ -1,0 +1,1 @@
+/opt/moose/mpich-3.3/gcc-9.2.0/bin/mpicxx    -fopenmp  -rdynamic CMakeFiles/testStencil2d.dir/testStencil2d.cxx.o  -o testStencil2d ../../cxx/libfidibench.a 
