@@ -18,6 +18,53 @@ Some of the capability at your fingertips:
 * Flexible, plugable graphical user interface
 * ~30 plugable interfaces allow specialization of every part of the solve
 
+SETUP libmesh
+=============
+Build Instructions For libmesh
+The default is to build libmesh "out of tree," i.e. within a separate build directory, rather than in the source tree itself. This simplifies the process of having multiple, independently-configured builds.
+
+cd to location of libmesh clone
+(Only if using a git clone) git submodule update --init
+mkdir build
+./configure
+make
+make check (optional, runs the example programs and unit tests when possible)
+make install
+
+SETUP MOOSE
+=============
+Prerequisites
+sudo apt-get install build-essential \
+  gfortran \
+  tcl \
+  git \
+  m4 \
+  freeglut3 \
+  doxygen \
+  libblas-dev \
+  liblapack-dev \
+  libx11-dev \
+  libnuma-dev \
+  libcurl4-gnutls-dev \
+  zlib1g-dev \
+  libhwloc-dev \
+  libxml2-dev \
+  libpng-dev \
+  pkg-config \
+  liblzma-dev
+  
+  Modify your Bash Profile
+  echo "module load moose-dev-gcc" >> ~/.bash_profile
+  
+  Compile libMesh
+  ./scripts/update_and_rebuild_libmesh.sh
+  
+  Compile and Test MOOSE
+  cd test
+  make -j Num_Threads
+  ./run_tests - Num_Threads
+  
+
 More Information
 ================
 
