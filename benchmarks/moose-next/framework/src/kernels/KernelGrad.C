@@ -9,14 +9,15 @@
 
 #include "KernelGrad.h"
 #include "Assembly.h"
+#include "SystemBase.h"
 #include "libmesh/quadrature.h"
 
-template <>
+defineLegacyParams(KernelGrad);
+
 InputParameters
-validParams<KernelGrad>()
+KernelGrad::validParams()
 {
-  InputParameters params = validParams<Kernel>();
-  return params;
+  return Kernel::validParams();
 }
 
 KernelGrad::KernelGrad(const InputParameters & parameters) : Kernel(parameters) {}

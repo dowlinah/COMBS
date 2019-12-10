@@ -26,6 +26,8 @@ InputParameters validParams<MultiAppInterpolationTransfer>();
 class MultiAppInterpolationTransfer : public MultiAppFieldTransfer
 {
 public:
+  static InputParameters validParams();
+
   MultiAppInterpolationTransfer(const InputParameters & parameters);
 
   virtual void execute() override;
@@ -49,4 +51,3 @@ protected:
   MooseEnum _interp_type;
   Real _radius;
 };
-

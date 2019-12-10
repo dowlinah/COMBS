@@ -785,6 +785,19 @@ public:
    */
   std::string & rawParamVal(const std::string & param) { return _params[param]._raw_val; };
 
+  /**
+   * Informs this object that values for this parameter set from the input file or from the command
+   * line should be ignored
+   */
+  template <typename T>
+  void ignoreParameter(const std::string & name);
+
+  /**
+   * Whether to ignore the value of an input parameter set in the input file or from the command
+   * line.
+   */
+  bool shouldIgnore(const std::string & name);
+
 private:
   // Private constructor so that InputParameters can only be created in certain places.
   InputParameters();
@@ -832,6 +845,8 @@ private:
     bool _controllable = false;
     /// Controllable execute flag restriction
     std::set<ExecFlagType> _controllable_flags;
+    /// whether user setting of this parameter should be ignored
+    bool _ignore = false;
   };
 
   Metadata & at(const std::string & param)
@@ -1311,6 +1326,14 @@ InputParameters::suppressParameter(const std::string & name)
 
 template <typename T>
 void
+InputParameters::ignoreParameter(const std::string & name)
+{
+  suppressParameter<T>(name);
+  _params[name]._ignore = true;
+}
+
+template <typename T>
+void
 InputParameters::makeParamRequired(const std::string & name)
 {
   if (!this->have_parameter<T>(name))
@@ -1476,7 +1499,12 @@ template <class T>
 InputParameters
 validParams()
 {
-  static_assert(false && sizeof(T), "Missing validParams declaration!");
-
-  mooseError("Missing validParams declaration!");
+  // If users forgot to make their (old) validParams, they screwed up and
+  // should get an error - so it is okay for us to try to call the new
+  // validParams static function - which will error if they didn't implement
+  // the new function.  We can't have the old static assert that use to be
+  // here because then the sfinae for toggling between old and new-style
+  // templating will always see this function and call it even if an object
+  // has *only* the new style validParams.
+  return T::validParams();
 }

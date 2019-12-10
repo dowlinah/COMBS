@@ -23,6 +23,8 @@ InputParameters validParams<CoupledVarNeumannBC>();
 class CoupledVarNeumannBC : public IntegratedBC
 {
 public:
+  static InputParameters validParams();
+
   CoupledVarNeumannBC(const InputParameters & parameters);
 
 protected:

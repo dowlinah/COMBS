@@ -16,10 +16,16 @@ template <>
 InputParameters
 validParams<BoundaryCondition>()
 {
-  InputParameters params = validParams<MooseObject>();
-  params += validParams<TransientInterface>();
-  params += validParams<BoundaryRestrictableRequired>();
-  params += validParams<TaggingInterface>();
+  return BoundaryCondition::validParams();
+}
+
+InputParameters
+BoundaryCondition::validParams()
+{
+  InputParameters params = MooseObject::validParams();
+  params += TransientInterface::validParams();
+  params += BoundaryRestrictableRequired::validParams();
+  params += TaggingInterface::validParams();
 
   params.addRequiredParam<NonlinearVariableName>(
       "variable", "The name of the variable that this boundary condition applies to");

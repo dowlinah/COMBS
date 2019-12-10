@@ -71,7 +71,6 @@ Coupleable::Coupleable(const MooseObject * moose_object, bool nodal)
             _coupled_array_moose_vars.push_back(tmp_var);
           else
             _obj->paramError(name, "provided c++ type for variable parameter is not supported");
-          // mooseError("Unknown variable type!");
         }
         else if (problem.hasScalarVariable(coupled_var_name))
         {
@@ -81,7 +80,6 @@ Coupleable::Coupleable(const MooseObject * moose_object, bool nodal)
         }
         else
           _obj->paramError(name, "coupled variable '", coupled_var_name, "' was not found");
-        // mooseError(_c_name, ": Coupled variable '", coupled_var_name, "' was not found");
       }
     }
     else // This means it was optional coupling.  Let's assign a unique id to this variable
@@ -758,6 +756,32 @@ Coupleable::coupledVectorDotDotOld(const std::string & var_name, unsigned int co
   return var->uDotDotOldNeighbor();
 }
 
+const VariableValue &
+Coupleable::coupledVectorDotDu(const std::string & var_name, unsigned int comp)
+{
+  VectorMooseVariable * var = getVectorVar(var_name, comp);
+  if (!var)
+    return _default_value_zero;
+  checkFuncType(var_name, VarType::Dot, FuncAge::Curr);
+
+  if (!_coupleable_neighbor)
+    return var->duDotDu();
+  return var->duDotDuNeighbor();
+}
+
+const VariableValue &
+Coupleable::coupledVectorDotDotDu(const std::string & var_name, unsigned int comp)
+{
+  VectorMooseVariable * var = getVectorVar(var_name, comp);
+  if (!var)
+    return _default_value_zero;
+  checkFuncType(var_name, VarType::Dot, FuncAge::Curr);
+
+  if (!_coupleable_neighbor)
+    return var->duDotDotDu();
+  return var->duDotDotDuNeighbor();
+}
+
 const ArrayVariableValue &
 Coupleable::coupledArrayDot(const std::string & var_name, unsigned int comp)
 {
@@ -886,7 +910,7 @@ Coupleable::coupledDotDotDu(const std::string & var_name, unsigned int comp)
   {
     if (_c_nodal)
       return var->dofValuesDuDotDotDuNeighbor();
-    return var->duDotDotDu();
+    return var->duDotDotDuNeighbor();
   }
 }
 

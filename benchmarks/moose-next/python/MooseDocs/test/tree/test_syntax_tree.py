@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 #* This file is part of the MOOSE framework
 #* https://www.mooseframework.org
 #*
@@ -60,6 +60,13 @@ class TestSyntaxTree(unittest.TestCase):
                                            name='fullpath')
         self.assertEqual(node.fullpath, '/VectorPostprocessors/VolumeHistogram')
         self.assertEqual(node.alias, '/VPP/VolumeHistogram')
+
+    def testADObject(self):
+        location = os.path.join(MooseDocs.MOOSE_DIR, 'test')
+        exe = mooseutils.find_moose_executable(location)
+        root = app_syntax(exe)
+        node = anytree.search.find_by_attr(root, '/Kernels/ADDiffusion', name='fullpath')
+        self.assertEqual(node.fullpath, '/Kernels/ADDiffusion')
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

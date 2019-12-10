@@ -242,6 +242,65 @@ MooseVariableData<OutputType>::sln(Moose::SolutionState state) const
 }
 
 template <typename OutputType>
+const typename MooseVariableData<OutputType>::FieldVariableValue &
+MooseVariableData<OutputType>::uDot() const
+{
+  if (_sys.solutionUDot())
+  {
+    _need_u_dot = true;
+    return _u_dot;
+  }
+  else
+    mooseError("MooseVariableFE: Time derivative of solution (`u_dot`) is not stored. Please set "
+               "uDotRequested() to true in FEProblemBase before requesting `u_dot`.");
+}
+
+template <typename OutputType>
+const typename MooseVariableData<OutputType>::FieldVariableValue &
+MooseVariableData<OutputType>::uDotDot() const
+{
+  if (_sys.solutionUDotDot())
+  {
+    _need_u_dotdot = true;
+    return _u_dotdot;
+  }
+  else
+    mooseError("MooseVariableFE: Second time derivative of solution (`u_dotdot`) is not stored. "
+               "Please set uDotDotRequested() to true in FEProblemBase before requesting "
+               "`u_dotdot`.");
+}
+
+template <typename OutputType>
+const typename MooseVariableData<OutputType>::FieldVariableValue &
+MooseVariableData<OutputType>::uDotOld() const
+{
+  if (_sys.solutionUDotOld())
+  {
+    _need_u_dot_old = true;
+    return _u_dot_old;
+  }
+  else
+    mooseError("MooseVariableFE: Old time derivative of solution (`u_dot_old`) is not stored. "
+               "Please set uDotOldRequested() to true in FEProblemBase before requesting "
+               "`u_dot_old`.");
+}
+
+template <typename OutputType>
+const typename MooseVariableData<OutputType>::FieldVariableValue &
+MooseVariableData<OutputType>::uDotDotOld() const
+{
+  if (_sys.solutionUDotDotOld())
+  {
+    _need_u_dotdot_old = true;
+    return _u_dotdot_old;
+  }
+  else
+    mooseError("MooseVariableFE: Old second time derivative of solution (`u_dotdot_old`) is not "
+               "stored. Please set uDotDotOldRequested() to true in FEProblemBase before "
+               "requesting `u_dotdot_old`");
+}
+
+template <typename OutputType>
 const typename MooseVariableData<OutputType>::FieldVariableGradient &
 MooseVariableData<OutputType>::gradSln(Moose::SolutionState state) const
 {
@@ -273,6 +332,35 @@ MooseVariableData<OutputType>::gradSln(Moose::SolutionState state) const
       // htpps://stackoverflow.com/questions/18680378/after-defining-case-for-all-enum-values-compiler-still-says-control-reaches-e
       mooseError("Unknown SolutionState!");
   }
+}
+
+template <typename OutputType>
+const typename MooseVariableData<OutputType>::FieldVariableGradient &
+MooseVariableData<OutputType>::gradSlnDot() const
+{
+  if (_sys.solutionUDot())
+  {
+    _need_grad_dot = true;
+    return _grad_u_dot;
+  }
+  else
+    mooseError("MooseVariableFE: Time derivative of solution (`u_dot`) is not stored. Please set "
+               "uDotRequested() to true in FEProblemBase before requesting `u_dot`.");
+}
+
+template <typename OutputType>
+const typename MooseVariableData<OutputType>::FieldVariableGradient &
+MooseVariableData<OutputType>::gradSlnDotDot() const
+{
+  if (_sys.solutionUDotDot())
+  {
+    _need_grad_dotdot = true;
+    return _grad_u_dotdot;
+  }
+  else
+    mooseError("MooseVariableFE: Second time derivative of solution (`u_dotdot`) is not stored. "
+               "Please set uDotDotRequested() to true in FEProblemBase before requesting "
+               "`u_dotdot`.");
 }
 
 template <typename OutputType>
@@ -1242,10 +1330,15 @@ MooseVariableData<OutputType>::computeAD(const unsigned int num_dofs, const unsi
   mooseAssert(_var.kind() == Moose::VarKindType::VAR_AUXILIARY || ad_offset || !_var_num,
               "Either this is the zeroth variable or we should have an offset");
 
-  // Hopefully this problem can go away at some point
-  if (ad_offset + num_dofs > AD_MAX_DOFS_PER_ELEM)
-    mooseError("Current number of dofs per element is greater than AD_MAX_DOFS_PER_ELEM of ",
-               AD_MAX_DOFS_PER_ELEM);
+#ifndef MOOSE_SPARSE_AD
+  if (ad_offset + num_dofs > MOOSE_AD_MAX_DOFS_PER_ELEM)
+    mooseError("Current number of dofs per element ",
+               ad_offset + num_dofs,
+               " is greater than AD_MAX_DOFS_PER_ELEM of ",
+               MOOSE_AD_MAX_DOFS_PER_ELEM,
+               ". You can run `configure --with-derivative-size=<n>` to request a larger "
+               "derivative container.");
+#endif
 
   for (unsigned int qp = 0; qp < nqp; qp++)
   {
@@ -1268,7 +1361,7 @@ MooseVariableData<OutputType>::computeAD(const unsigned int num_dofs, const unsi
 
     // NOTE!  You have to do this AFTER setting the value!
     if (_var.kind() == Moose::VAR_NONLINEAR)
-      _ad_dof_values[i].derivatives()[ad_offset + i] = 1.0;
+      Moose::derivInsert(_ad_dof_values[i].derivatives(), ad_offset + i, 1.);
 
     if (_need_ad_u_dot && _time_integrator)
     {
@@ -2246,7 +2339,7 @@ MooseVariableData<OutputType>::fetchADDoFValues()
   {
     _ad_dof_values[i] = _dof_values[i];
     if (_var.kind() == Moose::VAR_NONLINEAR)
-      _ad_dof_values[i].derivatives()[ad_offset + i] = 1.;
+      Moose::derivInsert(_ad_dof_values[i].derivatives(), ad_offset + i, 1.);
     assignADNodalValue(_ad_dof_values[i], i);
   }
 }

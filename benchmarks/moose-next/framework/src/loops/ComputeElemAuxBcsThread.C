@@ -14,6 +14,7 @@
 #include "DisplacedProblem.h"
 #include "Assembly.h"
 #include "AuxKernel.h"
+#include "SwapBackSentinel.h"
 
 #include "libmesh/threads.h"
 
@@ -59,6 +60,9 @@ ComputeElemAuxBcsThread<AuxKernelType>::operator()(const ConstBndElemRange & ran
     unsigned short int side = belem->_side;
     BoundaryID boundary_id = belem->_bnd_id;
 
+    // need to update the boundary ID in assembly
+    _problem.setCurrentBoundaryID(boundary_id, _tid);
+
     if (elem->processor_id() == _problem.processor_id())
     {
       // prepare variables
@@ -83,7 +87,9 @@ ComputeElemAuxBcsThread<AuxKernelType>::operator()(const ConstBndElemRange & ran
             needed_mat_props.insert(mp_deps.begin(), mp_deps.end());
           }
           _problem.setActiveMaterialProperties(needed_mat_props, _tid);
+
           _problem.reinitMaterialsFace(elem->subdomain_id(), _tid);
+
           _problem.reinitMaterialsBoundary(boundary_id, _tid);
         }
 

@@ -60,6 +60,8 @@ InputParameters validParams<SubProblem>();
 class SubProblem : public Problem
 {
 public:
+  static InputParameters validParams();
+
   SubProblem(const InputParameters & parameters);
   virtual ~SubProblem();
 
@@ -368,6 +370,9 @@ public:
    */
   virtual void reinitScalars(THREAD_ID tid, bool reinit_for_derivative_reordering = false) = 0;
   virtual void reinitOffDiagScalars(THREAD_ID tid) = 0;
+
+  /// sets the current boundary ID in assembly
+  void setCurrentBoundaryID(BoundaryID bid, THREAD_ID tid);
 
   /**
    * reinitialize FE objects on a given element on a given side at a given set of reference

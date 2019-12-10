@@ -18,12 +18,12 @@
 #include "SystemBase.h"
 #include "Assembly.h"
 
-template <>
+defineLegacyParams(SubProblem);
+
 InputParameters
-validParams<SubProblem>()
+SubProblem::validParams()
 {
-  InputParameters params = validParams<Problem>();
-  params.addPrivateParam<MooseMesh *>("mesh");
+  InputParameters params = Problem::validParams();
 
   params.addParam<bool>(
       "default_ghosting",
@@ -599,6 +599,12 @@ std::string
 SubProblem::restrictionBoundaryCheckName(BoundaryID check_id)
 {
   return mesh().getMesh().get_boundary_info().sideset_name(check_id);
+}
+
+void
+SubProblem::setCurrentBoundaryID(BoundaryID bid, THREAD_ID tid)
+{
+  assembly(tid).setCurrentBoundaryID(bid);
 }
 
 unsigned int

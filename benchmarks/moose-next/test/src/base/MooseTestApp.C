@@ -18,11 +18,10 @@
 
 #include "MooseTestApp.h"
 
-template <>
 InputParameters
-validParams<MooseTestApp>()
+MooseTestApp::validParams()
 {
-  InputParameters params = validParams<MooseApp>();
+  InputParameters params = MooseApp::validParams();
   /* MooseTestApp is special because it will have its own
    * binary and we want the default to allow test objects.
    */
@@ -68,6 +67,7 @@ MooseTestApp::registerAll(Factory & f, ActionFactory & af, Syntax & s, bool use_
     // For testing the ability to create problems in user defined Actions
     registerSyntax("CreateSpecialProblemAction", "TestProblem");
     registerSyntax("AddDGDiffusion", "DGDiffusionAction");
+    registerSyntax("MeshMetaDataDependenceAction", "AutoLineSamplerTest");
   }
 }
 

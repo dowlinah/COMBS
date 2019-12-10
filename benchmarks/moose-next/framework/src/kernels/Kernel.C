@@ -19,11 +19,12 @@
 #include "libmesh/threads.h"
 #include "libmesh/quadrature.h"
 
-template <>
+defineLegacyParams(Kernel);
+
 InputParameters
-validParams<Kernel>()
+Kernel::validParams()
 {
-  InputParameters params = validParams<KernelBase>();
+  InputParameters params = KernelBase::validParams();
   params.registerBase("Kernel");
   return params;
 }
@@ -121,7 +122,7 @@ Kernel::computeJacobian()
 
   accumulateTaggedLocalMatrix();
 
-  if (_has_diag_save_in)
+  if (_has_diag_save_in && !_sys.computingScalingJacobian())
   {
     DenseVector<Number> diag = _assembly.getJacobianDiagonal(_local_ke);
     Threads::spin_mutex::scoped_lock lock(Threads::spin_mtx);

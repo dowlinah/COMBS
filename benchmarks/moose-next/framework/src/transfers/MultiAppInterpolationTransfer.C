@@ -23,11 +23,12 @@
 
 registerMooseObject("MooseApp", MultiAppInterpolationTransfer);
 
-template <>
+defineLegacyParams(MultiAppInterpolationTransfer);
+
 InputParameters
-validParams<MultiAppInterpolationTransfer>()
+MultiAppInterpolationTransfer::validParams()
 {
-  InputParameters params = validParams<MultiAppFieldTransfer>();
+  InputParameters params = MultiAppFieldTransfer::validParams();
   params.addClassDescription(
       "Transfers the value to the target domain from the nearest node in the source domain.");
   params.addParam<unsigned int>(
@@ -69,7 +70,7 @@ MultiAppInterpolationTransfer::execute()
 {
   _console << "Beginning InterpolationTransfer " << name() << std::endl;
 
-  switch (_direction)
+  switch (_current_direction)
   {
     case TO_MULTIAPP:
     {

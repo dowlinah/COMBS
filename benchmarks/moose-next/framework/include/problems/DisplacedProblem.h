@@ -38,6 +38,8 @@ InputParameters validParams<DisplacedProblem>();
 class DisplacedProblem : public SubProblem
 {
 public:
+  static InputParameters validParams();
+
   DisplacedProblem(const InputParameters & parameters);
 
   virtual EquationSystems & es() override { return _eq; }
@@ -131,31 +133,12 @@ public:
                                                   const std::string & var_name) override;
   virtual System & getSystem(const std::string & var_name) override;
 
-  virtual void addVariable(const std::string & var_name,
-                           const FEType & type,
-                           Real scale_factor,
-                           const std::set<SubdomainID> * const active_subdomains = NULL);
-  virtual void addArrayVariable(const std::string & var_name,
-                                const FEType & type,
-                                unsigned int components,
-                                const std::vector<Real> & scale_factor,
-                                const std::set<SubdomainID> * const active_subdomains = NULL);
-  virtual void addAuxVariable(const std::string & var_name,
-                              const FEType & type,
-                              const std::set<SubdomainID> * const active_subdomains = NULL);
-  virtual void addAuxArrayVariable(const std::string & var_name,
-                                   const FEType & type,
-                                   unsigned int components,
-                                   const std::set<SubdomainID> * const active_subdomains = NULL);
-  virtual void addScalarVariable(const std::string & var_name,
-                                 Order order,
-                                 Real scale_factor = 1.,
-                                 const std::set<SubdomainID> * const active_subdomains = NULL);
-  virtual void addAuxScalarVariable(const std::string & var_name,
-                                    Order order,
-                                    Real scale_factor = 1.,
-                                    const std::set<SubdomainID> * const active_subdomains = NULL);
-
+  virtual void
+  addVariable(const std::string & var_type, const std::string & name, InputParameters & parameters);
+  virtual void addAuxVariable(const std::string & var_type,
+                              const std::string & name,
+                              InputParameters & parameters);
+  //
   // Adaptivity /////
   virtual void initAdaptivity();
   virtual void meshChanged() override;

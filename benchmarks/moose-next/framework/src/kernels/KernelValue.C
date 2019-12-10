@@ -9,14 +9,15 @@
 
 #include "KernelValue.h"
 #include "Assembly.h"
+#include "SystemBase.h"
 #include "libmesh/quadrature.h"
 
-template <>
+defineLegacyParams(KernelValue);
+
 InputParameters
-validParams<KernelValue>()
+KernelValue::validParams()
 {
-  InputParameters params = validParams<Kernel>();
-  return params;
+  return Kernel::validParams();
 }
 
 KernelValue::KernelValue(const InputParameters & parameters) : Kernel(parameters) {}

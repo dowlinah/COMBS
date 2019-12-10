@@ -20,6 +20,8 @@ InputParameters validParams<NonlinearEigen>();
 class NonlinearEigen : public EigenExecutionerBase
 {
 public:
+  static InputParameters validParams();
+
   NonlinearEigen(const InputParameters & parameters);
 
   virtual void init() override;
@@ -39,4 +41,3 @@ protected:
   bool _output_after_pi;
   bool _last_solve_converged;
 };
-

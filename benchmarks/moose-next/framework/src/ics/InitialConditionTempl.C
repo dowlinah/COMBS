@@ -11,6 +11,7 @@
 #include "FEProblem.h"
 #include "Assembly.h"
 #include "MooseVariableFE.h"
+#include "SystemBase.h"
 
 #include "libmesh/fe_interface.h"
 #include "libmesh/quadrature.h"
@@ -19,20 +20,28 @@ template <>
 InputParameters
 validParams<InitialConditionTempl<Real>>()
 {
-  return validParams<InitialConditionBase>();
+  return InitialConditionTempl<Real>::validParams();
 }
 template <>
 InputParameters
 validParams<InitialConditionTempl<RealVectorValue>>()
 {
-  return validParams<InitialConditionBase>();
+  return InitialConditionTempl<RealVectorValue>::validParams();
 }
 
 template <>
 InputParameters
 validParams<InitialConditionTempl<RealEigenVector>>()
 {
-  return validParams<InitialConditionBase>();
+  return InitialConditionTempl<RealEigenVector>::validParams();
+}
+
+template <typename T>
+InputParameters
+InitialConditionTempl<T>::validParams()
+{
+  InputParameters params = InitialConditionBase::validParams();
+  return params;
 }
 
 template <typename T>

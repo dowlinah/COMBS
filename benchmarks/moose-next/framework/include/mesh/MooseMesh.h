@@ -77,8 +77,12 @@ public:
   /**
    * Typical "Moose-style" constructor and copy constructor.
    */
+  static InputParameters validParams();
+
   MooseMesh(const InputParameters & parameters);
   MooseMesh(const MooseMesh & other_mesh);
+  MooseMesh() = delete;
+  MooseMesh & operator=(const MooseMesh & other_mesh) = delete;
 
   virtual ~MooseMesh();
 
@@ -603,9 +607,15 @@ public:
   std::vector<SubdomainID> getSubdomainIDs(const std::vector<SubdomainName> & subdomain_name) const;
 
   /**
-   * This method returns a writable reference to a subdomain name based on the id parameter
+   * This method sets the name for \p subdomain_id to \p name
    */
-  void setSubdomainName(SubdomainID subdomain_id, SubdomainName name);
+  void setSubdomainName(SubdomainID subdomain_id, const SubdomainName & name);
+
+  /**
+   * This method sets the name for \p subdomain_id on the provided \p mesh to \p name
+   */
+  static void
+  setSubdomainName(MeshBase & mesh, SubdomainID subdomain_id, const SubdomainName & name);
 
   /**
    * Return the name of a block given an id.
@@ -740,6 +750,15 @@ public:
   changeBoundaryId(const boundary_id_type old_id, const boundary_id_type new_id, bool delete_prev);
 
   /**
+   * Change all the boundary IDs for a given side from old_id to new_id for the given \p mesh.  If
+   * delete_prev is true, also actually remove the side with old_id from the BoundaryInfo object.
+   */
+  static void changeBoundaryId(MeshBase & mesh,
+                               const boundary_id_type old_id,
+                               const boundary_id_type new_id,
+                               bool delete_prev);
+
+  /**
    * Get the list of boundary ids associated with the given subdomain id.
    *
    * @param subdomain_id The subdomain ID you want to get the boundary ids for.
@@ -804,6 +823,15 @@ public:
   void allowRecovery(bool allow) { _allow_recovery = allow; }
 
   /**
+   * Method for setting the partitioner on the passed in mesh_base object.
+   */
+  static void setPartitioner(MeshBase & mesh_base,
+                             MooseEnum & partitioner,
+                             bool use_distributed_mesh,
+                             const InputParameters & params,
+                             MooseObject & context_obj);
+
+  /**
    * Setter for custom partitioner
    */
   void setCustomPartitioner(Partitioner * partitioner);
@@ -846,6 +874,11 @@ public:
    * Whether we need to delete remote elements
    */
   bool needsRemoteElemDeletion() const { return _need_delete; }
+
+  /**
+   * Whether mesh base object was constructed or not
+   */
+  bool hasMeshBase() const { return _mesh.get() != nullptr; }
 
 protected:
   /// Deprecated (DO NOT USE)
@@ -1017,6 +1050,7 @@ protected:
   void cacheInfo();
   void freeBndNodes();
   void freeBndElems();
+  void setPartitionerHelper();
 
 private:
   /**
@@ -1257,4 +1291,3 @@ struct MooseMesh::const_bnd_elem_iterator : variant_filter_iterator<MeshBase::Pr
  */
 typedef StoredRange<MooseMesh::const_bnd_node_iterator, const BndNode *> ConstBndNodeRange;
 typedef StoredRange<MooseMesh::const_bnd_elem_iterator, const BndElement *> ConstBndElemRange;
-

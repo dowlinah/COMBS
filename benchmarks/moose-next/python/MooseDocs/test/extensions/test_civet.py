@@ -1,4 +1,13 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+#* This file is part of the MOOSE framework
+#* https://www.mooseframework.org
+#*
+#* All rights reserved, see COPYRIGHT for full restrictions
+#* https://github.com/idaholab/moose/blob/master/COPYRIGHT
+#*
+#* Licensed under LGPL 2.1, please see LICENSE for details
+#* https://www.gnu.org/licenses/lgpl-2.1.html
+
 import unittest
 import logging
 from MooseDocs.test import MooseDocsTestCase
@@ -8,14 +17,14 @@ logging.basicConfig()
 
 class TestInlineCivet(MooseDocsTestCase):
     EXTENSIONS = [core, command, civet]
-    TEXT = u"[!civet!results owner=idaholab repo=moose](Results)"
+    TEXT = "[!civet!results owner=idaholab repo=moose](Results)"
 
     def testAST(self):
         ast = self.tokenize(self.TEXT)
         self.assertSize(ast, 1)
         self.assertToken(ast(0), 'Paragraph', size=1)
         self.assertToken(ast(0)(0), 'Link', size=1)
-        self.assertToken(ast(0)(0)(0), 'Word', size=0, content=u'Results')
+        self.assertToken(ast(0)(0)(0), 'Word', size=0, content='Results')
 
         url = ast(0)(0)['url']
         self.assertIn('https://civet.inl.gov/sha_events/idaholab/moose/', url)
