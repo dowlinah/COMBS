@@ -4,9 +4,13 @@ import os
 
 
 base = 'benchmarks'
-folders = [ "matrix-mpi","phase-retrieval-benchmarks",
-            "lid-driven-cavity","FourierBenchmarks",
-            "hpcg" ]
+folders = [ 
+        "lid-driven-cavity"
+#        ,"matrix-mpi"
+#        ,"phase-retrieval-benchmarks"
+#        ,"FourierBenchmarks"
+#        ,"hpcg" 
+        ]
 
 metaData = ['minutes','seconds','instructions','memory']
 data = dict()
@@ -27,7 +31,7 @@ for folder in folders:
 
     minutes = ""
     seconds = ""
-    for time in rawTimeData[-3:]
+    for time in rawTimeData[-3:]:
         if 'real' in time:
             parts = time.split('\t')
             minutes = parts[1].split('m')[0]
@@ -70,5 +74,25 @@ for benchmark in data:
     for header in metaData:
         print("%s\t%s\t%s" % (benchmark,header,data[benchmark][header]))
 
+# output latex table
+headers = ["Benchmark", "Time(s)", "Instruction Count", "Max Memory Usage(B)"]
 
+with open('output.tex','w') as ofh:
+    ofh.write("\\begin{tabular}{|c|c|c|c|}\n\\hline\n")
+    ofh.write("\t%s \\\\ \hline \n" % (" & ".join(headers) ) )
+    for benchmark in data:
+        finalSeconds = (float(
+            data[benchmark]['minutes'])*60
+            )+float(data[benchmark]['seconds'])
+        
+        ofh.write(
+            "\t%s & %s & %s & %s \\\\ \\hline \n" % (
+                benchmark,
+                finalSeconds,
+                data[benchmark]['instructions'],
+                data[benchmark]['memory']
+            )
+        )
+
+    ofh.write("\\end{tabular}\n")
 
