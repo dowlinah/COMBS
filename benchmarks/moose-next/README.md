@@ -33,7 +33,10 @@ make install
 
 SETUP MOOSE
 =============
+
 Prerequisites
+--------------
+
 sudo apt-get install 
   build-essential \
   gfortran \
@@ -53,6 +56,12 @@ sudo apt-get install
   libpng-dev \
   pkg-config \
   liblzma-dev
+  
+  Environment
+  --------------
+  In instructions change ~/projects to pathway to this benchmark
+  https://mooseframework.inl.gov/old/wiki/BasicManualInstallation/Linux/
+  
   
   Modify your Bash Profile
   ------------------------
