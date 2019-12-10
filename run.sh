@@ -3,25 +3,25 @@
 cd benchmarks
 
 cd matrix-mpi
-#make bench
+make bench
 cd ..
 cd phase-retrieval-benchmarks
-#make bench
+make bench
 cd ..
 cd lid-driven-cavity
-#make bench
+make bench
 cd ..
 cd FourierBenchmarks
-#make bench
+make bench
 cd ..
 cd hpcg
-#./bench.sh
+./bench.sh
 cd ..
 cd 2d-heat/src
-#make bench
+make bench
 cd ../..
 cd sombrero/sombrero-master
-#make bench
+make bench
 cd ../..
 cd fidibench
 ./bench.sh
@@ -29,5 +29,4 @@ cd ..
 cd radix_sort
 make bench
 cd ../..
-echo "test"
 ./getData.py | tee ./results.txt
