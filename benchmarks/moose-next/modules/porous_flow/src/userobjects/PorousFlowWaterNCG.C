@@ -84,11 +84,11 @@ PorousFlowWaterNCG::thermophysicalProperties(Real pressure,
 
   // AD versions of primary variables
   DualReal p = pressure;
-  p.derivatives()[_pidx] = 1.0;
+  Moose::derivInsert(p.derivatives(), _pidx, 1.0);
   DualReal T = temperature;
-  T.derivatives()[_Tidx] = 1.0;
+  Moose::derivInsert(T.derivatives(), _Tidx, 1.0);
   DualReal Zncg = Z;
-  Zncg.derivatives()[_Zidx] = 1.0;
+  Moose::derivInsert(Zncg.derivatives(), _Zidx, 1.0);
 
   // Clear all of the FluidStateProperties data
   clearFluidStateProperties(fsp);
@@ -167,9 +167,9 @@ PorousFlowWaterNCG::massFractions(const DualReal & pressure,
       Yncg = 0.0;
       Xh2o = 1.0 - Z;
       Yh2o = 0.0;
-      Xncg.derivatives()[_pidx] = 0.0;
-      Xncg.derivatives()[_Tidx] = 0.0;
-      Xncg.derivatives()[_Zidx] = 1.0;
+      Moose::derivInsert(Xncg.derivatives(), _pidx, 0.0);
+      Moose::derivInsert(Xncg.derivatives(), _Tidx, 0.0);
+      Moose::derivInsert(Xncg.derivatives(), _Zidx, 1.0);
       break;
     }
 
@@ -178,9 +178,9 @@ PorousFlowWaterNCG::massFractions(const DualReal & pressure,
       Xncg = 0.0;
       Yncg = Z;
       Yh2o = 1.0 - Z;
-      Yncg.derivatives()[_pidx] = 0.0;
-      Yncg.derivatives()[_Tidx] = 0.0;
-      Yncg.derivatives()[_Zidx] = 1.0;
+      Moose::derivInsert(Yncg.derivatives(), _pidx, 0.0);
+      Moose::derivInsert(Yncg.derivatives(), _Tidx, 0.0);
+      Moose::derivInsert(Yncg.derivatives(), _Zidx, 1.0);
       break;
     }
 
@@ -233,6 +233,10 @@ PorousFlowWaterNCG::gasProperties(const DualReal & pressure,
 
   // Enthalpy of the gas phase is a weighted sum of the individual enthalpies
   gas.enthalpy = Yncg * ncg_enthalpy + (1.0 - Yncg) * vapor_enthalpy;
+
+  //  Internal energy of the gas phase (e = h - pv)
+  mooseAssert(gas.density.value() > 0.0, "Gas density must be greater than zero");
+  gas.internal_energy = gas.enthalpy - pressure / gas.density;
 }
 
 void
@@ -260,6 +264,10 @@ PorousFlowWaterNCG::liquidProperties(const DualReal & pressure,
 
   const DualReal Xncg = liquid.mass_fraction[_gas_fluid_component];
   liquid.enthalpy = (1.0 - Xncg) * water_enthalpy + Xncg * (ncg_enthalpy + hdis);
+
+  //  Internal energy of the liquid phase (e = h - pv)
+  mooseAssert(liquid.density.value() > 0.0, "Liquid density must be greater than zero");
+  liquid.internal_energy = liquid.enthalpy - pressure / liquid.density;
 }
 
 DualReal
@@ -399,8 +407,7 @@ PorousFlowWaterNCG::enthalpyOfDissolution(const DualReal & temperature) const
   const Real dhdis_dT =
       (-_R * t2 * t2 * Kh2.derivatives()[_Tidx] / Kh2 / _Mncg - hdis).value() / dT;
 
-  for (std::size_t i = 0; i < temperature.derivatives().size(); ++i)
-    hdis.derivatives()[i] = temperature.derivatives()[i] * dhdis_dT;
+  hdis.derivatives() = temperature.derivatives() * dhdis_dT;
 
   return hdis;
 }

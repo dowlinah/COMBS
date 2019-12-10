@@ -17,11 +17,12 @@
 #include "libmesh/threads.h"
 #include "libmesh/quadrature.h"
 
-template <>
+defineLegacyParams(VectorKernel);
+
 InputParameters
-validParams<VectorKernel>()
+VectorKernel::validParams()
 {
-  InputParameters params = validParams<KernelBase>();
+  InputParameters params = KernelBase::validParams();
   params.registerBase("VectorKernel");
   return params;
 }
@@ -84,7 +85,7 @@ VectorKernel::computeJacobian()
 
   ke += _local_ke;
 
-  if (_has_diag_save_in)
+  if (_has_diag_save_in && !_sys.computingScalingJacobian())
   {
     unsigned int rows = ke.m();
     DenseVector<Number> diag(rows);

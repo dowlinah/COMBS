@@ -28,6 +28,8 @@ InputParameters validParams<MultiAppCopyTransfer>();
 class MultiAppCopyTransfer : public MultiAppTransfer
 {
 public:
+  static InputParameters validParams();
+
   MultiAppCopyTransfer(const InputParameters & parameters);
 
   /**

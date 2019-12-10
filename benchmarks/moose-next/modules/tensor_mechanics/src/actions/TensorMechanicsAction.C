@@ -33,11 +33,12 @@ registerMooseAction("TensorMechanicsApp", TensorMechanicsAction, "add_aux_kernel
 
 registerMooseAction("TensorMechanicsApp", TensorMechanicsAction, "add_material");
 
-template <>
+defineLegacyParams(TensorMechanicsAction);
+
 InputParameters
-validParams<TensorMechanicsAction>()
+TensorMechanicsAction::validParams()
 {
-  InputParameters params = validParams<TensorMechanicsActionBase>();
+  InputParameters params = TensorMechanicsActionBase::validParams();
   params.addClassDescription("Set up stress divergence kernels with coordinate system aware logic");
 
   // parameters specified here only appear in the input file sub-blocks of the
@@ -56,6 +57,9 @@ validParams<TensorMechanicsAction>()
   params.addParam<std::string>(
       "strain_base_name",
       "The base name used for the strain. If not provided, it will be set equal to base_name");
+  params.addParam<std::vector<TagName>>(
+      "extra_vector_tags",
+      "The tag names for extra vectors that residual data should be saved into");
 
   return params;
 }
@@ -203,18 +207,18 @@ TensorMechanicsAction::act()
   //
   else if (_current_task == "add_variable" && getParam<bool>("add_variables"))
   {
+    auto params = _factory.getValidParams("MooseVariable");
     // determine necessary order
     const bool second = _problem->mesh().hasSecondOrderElements();
+
+    params.set<MooseEnum>("order") = second ? "SECOND" : "FIRST";
+    params.set<MooseEnum>("family") = "LAGRANGE";
 
     // Loop through the displacement variables
     for (const auto & disp : _displacements)
     {
       // Create displacement variables
-      _problem->addVariable(disp,
-                            FEType(Utility::string_to_enum<Order>(second ? "SECOND" : "FIRST"),
-                                   Utility::string_to_enum<FEFamily>("LAGRANGE")),
-                            1.0,
-                            _subdomain_id_union.empty() ? nullptr : &_subdomain_id_union);
+      _problem->addVariable("MooseVariable", disp, params);
     }
   }
 
@@ -328,6 +332,9 @@ TensorMechanicsAction::act()
         params.set<std::vector<AuxVariableName>>("save_in") = {_save_in[i]};
       if (_diag_save_in.size() == _ndisp)
         params.set<std::vector<AuxVariableName>>("diag_save_in") = {_diag_save_in[i]};
+      if (isParamValid("extra_vector_tags"))
+        params.set<std::vector<TagName>>("extra_vector_tags") =
+            getParam<std::vector<TagName>>("extra_vector_tags");
 
       if (_use_ad)
       {
@@ -384,14 +391,14 @@ TensorMechanicsAction::actOutputGeneration()
   //
   if (_current_task == "add_aux_variable")
   {
+    auto params = _factory.getValidParams("MooseVariableConstMonomial");
+    params.set<MooseEnum>("order") = "CONSTANT";
+    params.set<MooseEnum>("family") = "MONOMIAL";
     // Loop through output aux variables
     for (auto out : _generate_output)
     {
       // Create output helper aux variables
-      _problem->addAuxVariable(_base_name + out,
-                               FEType(Utility::string_to_enum<Order>("CONSTANT"),
-                                      Utility::string_to_enum<FEFamily>("MONOMIAL")),
-                               _subdomain_id_union.empty() ? nullptr : &_subdomain_id_union);
+      _problem->addAuxVariable("MooseVariableConstMonomial", _base_name + out, params);
     }
   }
 

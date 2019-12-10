@@ -38,12 +38,13 @@
 // Call to "uname"
 #include <sys/utsname.h>
 
-template <>
+defineLegacyParams(MultiApp);
+
 InputParameters
-validParams<MultiApp>()
+MultiApp::validParams()
 {
-  InputParameters params = validParams<MooseObject>();
-  params += validParams<SetupInterface>();
+  InputParameters params = MooseObject::validParams();
+  params += SetupInterface::validParams();
 
   params.addParam<bool>("use_displaced_mesh",
                         false,
@@ -158,6 +159,9 @@ validParams<MultiApp>()
   params.addParam<std::vector<std::string>>("relaxed_variables",
                                             std::vector<std::string>(),
                                             "List of variables to relax during Picard Iteration");
+
+  params.addParam<bool>(
+      "clone_master_mesh", false, "True to clone master mesh and use it for this MultiApp.");
 
   params.addPrivateParam<std::shared_ptr<CommandLine>>("_command_line");
   params.addPrivateParam<bool>("use_positions", true);
@@ -635,6 +639,15 @@ MultiApp::createApp(unsigned int i, Real start_time)
            << ":" << COLOR_DEFAULT << std::endl;
   app_params.set<unsigned int>("_multiapp_level") = _app.multiAppLevel() + 1;
   app_params.set<unsigned int>("_multiapp_number") = _first_local_app + i;
+  if (getParam<bool>("clone_master_mesh"))
+  {
+    _console << COLOR_CYAN << "Cloned master mesh will be used for subapp " << name()
+             << COLOR_DEFAULT << std::endl;
+    app_params.set<const MooseMesh *>("_master_mesh") = &_fe_problem.mesh();
+    auto displaced_problem = _fe_problem.getDisplacedProblem();
+    if (displaced_problem)
+      app_params.set<const MooseMesh *>("_master_displaced_mesh") = &displaced_problem->mesh();
+  }
   _apps[i] = AppFactory::instance().createShared(_app_type, full_name, app_params, _my_comm);
   auto & app = _apps[i];
 

@@ -25,6 +25,8 @@ InputParameters validParams<Piecewise>();
 class Piecewise : public PiecewiseBase
 {
 public:
+  static InputParameters validParams();
+
   Piecewise(const InputParameters & parameters);
 
 protected:

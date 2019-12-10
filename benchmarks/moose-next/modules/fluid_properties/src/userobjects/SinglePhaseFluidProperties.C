@@ -14,6 +14,8 @@ InputParameters
 validParams<SinglePhaseFluidProperties>()
 {
   InputParameters params = validParams<FluidProperties>();
+  params.addCustomTypeParam<std::string>(
+      "fp_type", "single-phase-fp", "FPType", "Type of the fluid property object");
   return params;
 }
 
@@ -202,8 +204,7 @@ SinglePhaseFluidProperties::vaporPressure(const DualReal & T) const
   vaporPressure(temperature, p, dpdT);
 
   DualReal result = p;
-  for (std::size_t i = 0; i < T.derivatives().size(); ++i)
-    result.derivatives()[i] = T.derivatives()[i] * dpdT;
+  result.derivatives() = T.derivatives() * dpdT;
 
   return result;
 }
@@ -232,8 +233,7 @@ SinglePhaseFluidProperties::vaporTemperature(const DualReal & p) const
   vaporTemperature(pressure, T, dTdp);
 
   DualReal result = T;
-  for (std::size_t i = 0; i < p.derivatives().size(); ++i)
-    result.derivatives()[i] = p.derivatives()[i] * dTdp;
+  result.derivatives() = p.derivatives() * dTdp;
 
   return result;
 }

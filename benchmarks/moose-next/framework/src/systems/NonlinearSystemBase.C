@@ -65,12 +65,12 @@
 #include "ODETimeKernel.h"
 #include "AllLocalDofIndicesThread.h"
 #include "FloatingPointExceptionGuard.h"
-#include "MaxVarNDofsPerElem.h"
-#include "MaxVarNDofsPerNode.h"
 #include "ADKernel.h"
 #include "ADPresetNodalBC.h"
 #include "Moose.h"
 #include "TimedPrint.h"
+#include "ConsoleStream.h"
+#include "MooseError.h"
 
 // libMesh
 #include "libmesh/nonlinear_solver.h"
@@ -88,6 +88,8 @@
 #include "libmesh/sparse_matrix.h"
 #include "libmesh/petsc_matrix.h"
 #include "libmesh/default_coupling.h"
+
+#include <ios>
 
 // PETSc
 #ifdef LIBMESH_HAVE_PETSC
@@ -108,7 +110,6 @@ NonlinearSystemBase::NonlinearSystemBase(FEProblemBase & fe_problem,
     PerfGraphInterface(fe_problem.getMooseApp().perfGraph(), "NonlinearSystemBase"),
     _fe_problem(fe_problem),
     _sys(sys),
-    _last_rnorm(0.),
     _last_nl_rnorm(0.),
     _initial_residual_before_preset_bcs(0.),
     _initial_residual_after_preset_bcs(0.),
@@ -168,7 +169,13 @@ NonlinearSystemBase::NonlinearSystemBase(FEProblemBase & fe_problem,
     _compute_dampers_timer(registerTimedSection("computeDampers", 3)),
     _compute_dirac_timer(registerTimedSection("computeDirac", 3)),
     _compute_scaling_jacobian_timer(registerTimedSection("computeScalingJacobian", 2)),
-    _computing_initial_jacobian(false)
+    _computed_scaling(false),
+    _automatic_scaling(false),
+    _compute_scaling_once(true)
+#ifndef MOOSE_SPARSE_AD
+    ,
+    _required_derivative_size(0)
+#endif
 {
   getResidualNonTimeVector();
   // Don't need to add the matrix - it already exists (for now)
@@ -207,12 +214,6 @@ NonlinearSystemBase::init()
 
   if (_need_residual_copy)
     _residual_copy.init(_sys.n_dofs(), false, SERIAL);
-
-  if (_fe_problem.automaticScaling())
-    // We don't need libMesh to do projections since we will always be filling this vector from the
-    // diagonal of the preconditioning matrix, hence false for our second argument. We also do not
-    // need ghosting
-    _pmat_diagonal = &addVector("pmat_diagonal", false, PARALLEL);
 }
 
 void
@@ -254,25 +255,6 @@ NonlinearSystemBase::restoreSolutions()
 void
 NonlinearSystemBase::initialSetup()
 {
-  if (_fe_problem.haveADObjects())
-  {
-    CONSOLE_TIMED_PRINT("Computing max dofs per elem/node");
-
-    MaxVarNDofsPerElem mvndpe(_fe_problem, *this);
-    Threads::parallel_reduce(*_mesh.getActiveLocalElementRange(), mvndpe);
-    _max_var_n_dofs_per_elem = mvndpe.max();
-    _communicator.max(_max_var_n_dofs_per_elem);
-    auto displaced_problem = _fe_problem.getDisplacedProblem();
-    if (displaced_problem)
-      displaced_problem->nlSys().assignMaxVarNDofsPerElem(_max_var_n_dofs_per_elem);
-
-    MaxVarNDofsPerNode mvndpn(_fe_problem, *this);
-    Threads::parallel_reduce(*_mesh.getLocalNodeRange(), mvndpn);
-    _max_var_n_dofs_per_node = mvndpn.max();
-    _communicator.max(_max_var_n_dofs_per_node);
-    if (displaced_problem)
-      displaced_problem->nlSys().assignMaxVarNDofsPerNode(_max_var_n_dofs_per_node);
-  }
   {
     CONSOLE_TIMED_PRINT("Initializing Kernels, BCs and Constraints");
 
@@ -363,6 +345,21 @@ NonlinearSystemBase::timestepSetup()
   _constraints.timestepSetup();
   _general_dampers.timestepSetup();
   _nodal_bcs.timestepSetup();
+
+  // Do an initial Jacobian evaluation in order to determine variable scaling factors
+  if (_automatic_scaling)
+  {
+    if (_compute_scaling_once)
+    {
+      if (!_computed_scaling)
+      {
+        computeScalingJacobian();
+        _computed_scaling = true;
+      }
+    }
+    else
+      computeScalingJacobian();
+  }
 }
 
 void
@@ -394,7 +391,7 @@ NonlinearSystemBase::setupFieldDecomposition()
 void
 NonlinearSystemBase::addTimeIntegrator(const std::string & type,
                                        const std::string & name,
-                                       InputParameters parameters)
+                                       InputParameters & parameters)
 {
   parameters.set<SystemBase *>("_sys") = this;
 
@@ -405,7 +402,7 @@ NonlinearSystemBase::addTimeIntegrator(const std::string & type,
 void
 NonlinearSystemBase::addKernel(const std::string & kernel_name,
                                const std::string & name,
-                               InputParameters parameters)
+                               InputParameters & parameters)
 {
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); tid++)
   {
@@ -428,7 +425,7 @@ NonlinearSystemBase::addKernel(const std::string & kernel_name,
 void
 NonlinearSystemBase::addNodalKernel(const std::string & kernel_name,
                                     const std::string & name,
-                                    InputParameters parameters)
+                                    InputParameters & parameters)
 {
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); tid++)
   {
@@ -447,7 +444,7 @@ NonlinearSystemBase::addNodalKernel(const std::string & kernel_name,
 void
 NonlinearSystemBase::addScalarKernel(const std::string & kernel_name,
                                      const std::string & name,
-                                     InputParameters parameters)
+                                     InputParameters & parameters)
 {
   std::shared_ptr<ScalarKernel> kernel =
       _factory.create<ScalarKernel>(kernel_name, name, parameters);
@@ -457,7 +454,7 @@ NonlinearSystemBase::addScalarKernel(const std::string & kernel_name,
 void
 NonlinearSystemBase::addBoundaryCondition(const std::string & bc_name,
                                           const std::string & name,
-                                          InputParameters parameters)
+                                          InputParameters & parameters)
 {
   // ThreadID
   THREAD_ID tid = 0;
@@ -477,6 +474,13 @@ NonlinearSystemBase::addBoundaryCondition(const std::string & bc_name,
   // NodalBCBase
   if (nbc)
   {
+    if (!nbc->variable().isNodal())
+      mooseError("Trying to use nodal boundary condition '",
+                 nbc->name(),
+                 "' on a non-nodal variable '",
+                 nbc->variable().name(),
+                 "'.");
+
     _nodal_bcs.addObject(nbc);
     _vars[tid].addBoundaryVars(boundary_ids, nbc->getCoupledVars());
 
@@ -530,7 +534,7 @@ NonlinearSystemBase::addBoundaryCondition(const std::string & bc_name,
 void
 NonlinearSystemBase::addConstraint(const std::string & c_name,
                                    const std::string & name,
-                                   InputParameters parameters)
+                                   InputParameters & parameters)
 {
   std::shared_ptr<Constraint> constraint = _factory.create<Constraint>(c_name, name, parameters);
   _constraints.addObject(constraint);
@@ -542,7 +546,7 @@ NonlinearSystemBase::addConstraint(const std::string & c_name,
 void
 NonlinearSystemBase::addDiracKernel(const std::string & kernel_name,
                                     const std::string & name,
-                                    InputParameters parameters)
+                                    InputParameters & parameters)
 {
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); tid++)
   {
@@ -555,7 +559,7 @@ NonlinearSystemBase::addDiracKernel(const std::string & kernel_name,
 void
 NonlinearSystemBase::addDGKernel(std::string dg_kernel_name,
                                  const std::string & name,
-                                 InputParameters parameters)
+                                 InputParameters & parameters)
 {
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); ++tid)
   {
@@ -574,7 +578,7 @@ NonlinearSystemBase::addDGKernel(std::string dg_kernel_name,
 void
 NonlinearSystemBase::addInterfaceKernel(std::string interface_kernel_name,
                                         const std::string & name,
-                                        InputParameters parameters)
+                                        InputParameters & parameters)
 {
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); ++tid)
   {
@@ -592,7 +596,7 @@ NonlinearSystemBase::addInterfaceKernel(std::string interface_kernel_name,
 void
 NonlinearSystemBase::addDamper(const std::string & damper_name,
                                const std::string & name,
-                               InputParameters parameters)
+                               InputParameters & parameters)
 {
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); ++tid)
   {
@@ -620,7 +624,7 @@ NonlinearSystemBase::addDamper(const std::string & damper_name,
 void
 NonlinearSystemBase::addSplit(const std::string & split_name,
                               const std::string & name,
-                              InputParameters parameters)
+                              InputParameters & parameters)
 {
   std::shared_ptr<Split> split = _factory.create<Split>(split_name, name, parameters);
   _splits.addObject(split);
@@ -862,7 +866,7 @@ NonlinearSystemBase::computeTimeDerivatives(bool jacobian_calculation)
   // If we're doing any Jacobian calculation other than the initial Jacobian calculation for
   // automatic variable scaling, then we can just return because the residual function evaluation
   // has already done this work for us
-  if (jacobian_calculation && !_computing_initial_jacobian)
+  if (jacobian_calculation && !_computing_scaling_jacobian)
     return;
 
   if (_time_integrator)
@@ -2235,29 +2239,28 @@ NonlinearSystemBase::computeJacobianInternal(const std::set<TagID> & tags)
 
     auto & jacobian = getMatrix(tag);
 #ifdef LIBMESH_HAVE_PETSC
-// Necessary for speed
+    // Necessary for speed
+    if (auto petsc_matrix = dynamic_cast<PetscMatrix<Number> *>(&jacobian))
+    {
 #if PETSC_VERSION_LESS_THAN(3, 0, 0)
-    MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(), MAT_KEEP_ZEROED_ROWS);
+      MatSetOption(petsc_matrix->mat(), MAT_KEEP_ZEROED_ROWS);
 #elif PETSC_VERSION_LESS_THAN(3, 1, 0)
-    // In Petsc 3.0.0, MatSetOption has three args...the third arg
-    // determines whether the option is set (true) or unset (false)
-    MatSetOption(
-        static_cast<PetscMatrix<Number> &>(jacobian).mat(), MAT_KEEP_ZEROED_ROWS, PETSC_TRUE);
+      // In Petsc 3.0.0, MatSetOption has three args...the third arg
+      // determines whether the option is set (true) or unset (false)
+      MatSetOption(petsc_matrix->mat(), MAT_KEEP_ZEROED_ROWS, PETSC_TRUE);
 #else
-    MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(),
-                 MAT_KEEP_NONZERO_PATTERN, // This is changed in 3.1
-                 PETSC_TRUE);
-#endif
-#if PETSC_VERSION_LESS_THAN(3, 3, 0)
-#else
-    if (!_fe_problem.errorOnJacobianNonzeroReallocation())
-      MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(),
-                   MAT_NEW_NONZERO_ALLOCATION_ERR,
-                   PETSC_FALSE);
-#endif
-
-#endif
+      MatSetOption(petsc_matrix->mat(),
+                   MAT_KEEP_NONZERO_PATTERN, // This is changed in 3.1
+                   PETSC_TRUE);
+#endif // PETSC_VERSION
+#if !PETSC_VERSION_LESS_THAN(3, 3, 0)
+      if (!_fe_problem.errorOnJacobianNonzeroReallocation())
+        MatSetOption(petsc_matrix->mat(), MAT_NEW_NONZERO_ALLOCATION_ERR, PETSC_FALSE);
+    }
+#endif // PETSC_VERSION
+#endif // LIBMESH_HAVE_PETSC
   }
+
   // jacobianSetup /////
   for (THREAD_ID tid = 0; tid < libMesh::n_threads(); tid++)
   {
@@ -2283,20 +2286,34 @@ NonlinearSystemBase::computeJacobianInternal(const std::set<TagID> & tags)
 
   PARALLEL_TRY
   {
-    // We can compute these up front because we want these included whether we are computing an
-    // ordinary Jacobian or a Jacobian for determining variable scaling factors
+    // We would like to compute ScalarKernels and block NodalKernels up front because we want
+    // these included whether we are computing an ordinary Jacobian or a Jacobian for
+    // determining variable scaling factors
     computeScalarKernelsJacobians(tags);
+
+    // Block restricted Nodal Kernels
+    if (_nodal_kernels.hasActiveBlockObjects())
+    {
+      ComputeNodalKernelJacobiansThread cnkjt(_fe_problem, _nodal_kernels, tags);
+      ConstNodeRange & range = *_mesh.getLocalNodeRange();
+      Threads::parallel_reduce(range, cnkjt);
+
+      unsigned int n_threads = libMesh::n_threads();
+      for (unsigned int i = 0; i < n_threads;
+           i++) // Add any cached jacobians that might be hanging around
+        _fe_problem.assembly(i).addCachedJacobianContributions();
+    }
 
     // Get our element range for looping over
     ConstElemRange & elem_range = *_mesh.getActiveLocalElementRange();
 
-    if (_computing_initial_jacobian)
+    if (_computing_scaling_jacobian)
     {
-      // Only compute Jacobians corresponding to the diagonals of volumetric compute objects because
-      // this typically gives us a good representation of the physics. NodalBCs and Constraints can
-      // introduce dramatically different scales (often order unity). IntegratedBCs and/or
-      // InterfaceKernels may use penalty factors. DGKernels may be ok, but they are almost always
-      // used in conjunction with Kernels
+      // Only compute Jacobians corresponding to the diagonals of volumetric compute objects
+      // because this typically gives us a good representation of the physics. NodalBCs and
+      // Constraints can introduce dramatically different scales (often order unity).
+      // IntegratedBCs and/or InterfaceKernels may use penalty factors. DGKernels may be ok, but
+      // they are almost always used in conjunction with Kernels
       ComputeJacobianForScalingThread cj(_fe_problem, tags);
       Threads::parallel_reduce(elem_range, cj);
       unsigned int n_threads = libMesh::n_threads();
@@ -2320,19 +2337,6 @@ NonlinearSystemBase::computeJacobianInternal(const std::set<TagID> & tags)
         for (unsigned int i = 0; i < n_threads;
              i++) // Add any Jacobian contributions still hanging around
           _fe_problem.addCachedJacobian(i);
-
-        // Block restricted Nodal Kernels
-        if (_nodal_kernels.hasActiveBlockObjects())
-        {
-          ComputeNodalKernelJacobiansThread cnkjt(_fe_problem, _nodal_kernels, tags);
-          ConstNodeRange & range = *_mesh.getLocalNodeRange();
-          Threads::parallel_reduce(range, cnkjt);
-
-          unsigned int n_threads = libMesh::n_threads();
-          for (unsigned int i = 0; i < n_threads;
-               i++) // Add any cached jacobians that might be hanging around
-            _fe_problem.assembly(i).addCachedJacobianContributions();
-        }
 
         // Boundary restricted Nodal Kernels
         if (_nodal_kernels.hasActiveBoundaryObjects())
@@ -2359,19 +2363,6 @@ NonlinearSystemBase::computeJacobianInternal(const std::set<TagID> & tags)
         for (unsigned int i = 0; i < n_threads; i++)
           _fe_problem.addCachedJacobian(i);
 
-        // Block restricted Nodal Kernels
-        if (_nodal_kernels.hasActiveBlockObjects())
-        {
-          ComputeNodalKernelJacobiansThread cnkjt(_fe_problem, _nodal_kernels, tags);
-          ConstNodeRange & range = *_mesh.getLocalNodeRange();
-          Threads::parallel_reduce(range, cnkjt);
-
-          unsigned int n_threads = libMesh::n_threads();
-          for (unsigned int i = 0; i < n_threads;
-               i++) // Add any cached jacobians that might be hanging around
-            _fe_problem.assembly(i).addCachedJacobianContributions();
-        }
-
         // Boundary restricted Nodal Kernels
         if (_nodal_kernels.hasActiveBoundaryObjects())
         {
@@ -2379,7 +2370,6 @@ NonlinearSystemBase::computeJacobianInternal(const std::set<TagID> & tags)
           ConstBndNodeRange & bnd_range = *_mesh.getBoundaryNodeRange();
 
           Threads::parallel_reduce(bnd_range, cnkjt);
-
           unsigned int n_threads = libMesh::n_threads();
           for (unsigned int i = 0; i < n_threads;
                i++) // Add any cached jacobians that might be hanging around
@@ -2473,8 +2463,8 @@ NonlinearSystemBase::computeJacobianInternal(const std::set<TagID> & tags)
     }
 
     // reinit scalar variables again. This reinit does not re-fill any of the scalar variable
-    // solution arrays because that was done above. It only will reorder the derivative information
-    // for AD calculations to be suitable for NodalBC calculations
+    // solution arrays because that was done above. It only will reorder the derivative
+    // information for AD calculations to be suitable for NodalBC calculations
     for (unsigned int tid = 0; tid < libMesh::n_threads(); tid++)
       _fe_problem.reinitScalars(tid, true);
 
@@ -2623,21 +2613,21 @@ NonlinearSystemBase::computeJacobianBlocks(std::vector<JacobianBlock *> & blocks
 #if PETSC_VERSION_LESS_THAN(3, 0, 0)
     MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(), MAT_KEEP_ZEROED_ROWS);
 #elif PETSC_VERSION_LESS_THAN(3, 1, 0)
-    // In Petsc 3.0.0, MatSetOption has three args...the third arg
-    // determines whether the option is set (true) or unset (false)
-    MatSetOption(
-        static_cast<PetscMatrix<Number> &>(jacobian).mat(), MAT_KEEP_ZEROED_ROWS, PETSC_TRUE);
+      // In Petsc 3.0.0, MatSetOption has three args...the third arg
+      // determines whether the option is set (true) or unset (false)
+      MatSetOption(
+          static_cast<PetscMatrix<Number> &>(jacobian).mat(), MAT_KEEP_ZEROED_ROWS, PETSC_TRUE);
 #else
-    MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(),
-                 MAT_KEEP_NONZERO_PATTERN, // This is changed in 3.1
-                 PETSC_TRUE);
+      MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(),
+                   MAT_KEEP_NONZERO_PATTERN, // This is changed in 3.1
+                   PETSC_TRUE);
 #endif
 #if PETSC_VERSION_LESS_THAN(3, 3, 0)
 #else
-    if (!_fe_problem.errorOnJacobianNonzeroReallocation())
-      MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(),
-                   MAT_NEW_NONZERO_ALLOCATION_ERR,
-                   PETSC_TRUE);
+      if (!_fe_problem.errorOnJacobianNonzeroReallocation())
+        MatSetOption(static_cast<PetscMatrix<Number> &>(jacobian).mat(),
+                     MAT_NEW_NONZERO_ALLOCATION_ERR,
+                     PETSC_TRUE);
 #endif
 
 #endif
@@ -2688,9 +2678,8 @@ NonlinearSystemBase::computeJacobianBlocks(std::vector<JacobianBlock *> & blocks
             for (const auto & bc : bcs)
               if (bc->variable().number() == ivar && bc->shouldApply())
               {
-                // The first zero is for the variable number... there is only one variable in each
-                // mini-system
-                // The second zero only works with Lagrange elements!
+                // The first zero is for the variable number... there is only one variable in
+                // each mini-system The second zero only works with Lagrange elements!
                 zero_rows.push_back(node->dof_number(precond_system.number(), 0, 0));
               }
           }
@@ -2742,46 +2731,67 @@ NonlinearSystemBase::computeDamping(const NumericVector<Number> & solution,
   Real damping = 1.0;
   bool has_active_dampers = false;
 
-  if (_element_dampers.hasActiveObjects())
+  try
   {
-    TIME_SECTION(_compute_dampers_timer);
-    has_active_dampers = true;
-    *_increment_vec = update;
-    ComputeElemDampingThread cid(_fe_problem);
-    Threads::parallel_reduce(*_mesh.getActiveLocalElementRange(), cid);
-    damping = std::min(cid.damping(), damping);
-  }
-
-  if (_nodal_dampers.hasActiveObjects())
-  {
-    TIME_SECTION(_compute_dampers_timer);
-
-    has_active_dampers = true;
-    *_increment_vec = update;
-    ComputeNodalDampingThread cndt(_fe_problem);
-    Threads::parallel_reduce(*_mesh.getLocalNodeRange(), cndt);
-    damping = std::min(cndt.damping(), damping);
-  }
-
-  if (_general_dampers.hasActiveObjects())
-  {
-    TIME_SECTION(_compute_dampers_timer);
-
-    has_active_dampers = true;
-    const auto & gdampers = _general_dampers.getActiveObjects();
-    for (const auto & damper : gdampers)
+    if (_element_dampers.hasActiveObjects())
     {
-      Real gd_damping = damper->computeDamping(solution, update);
-      try
+      PARALLEL_TRY
       {
-        damper->checkMinDamping(gd_damping);
+        TIME_SECTION(_compute_dampers_timer);
+        has_active_dampers = true;
+        *_increment_vec = update;
+        ComputeElemDampingThread cid(_fe_problem);
+        Threads::parallel_reduce(*_mesh.getActiveLocalElementRange(), cid);
+        damping = std::min(cid.damping(), damping);
       }
-      catch (MooseException & e)
-      {
-        _fe_problem.setException(e.what());
-      }
-      damping = std::min(gd_damping, damping);
+      PARALLEL_CATCH;
     }
+
+    if (_nodal_dampers.hasActiveObjects())
+    {
+      PARALLEL_TRY
+      {
+        TIME_SECTION(_compute_dampers_timer);
+
+        has_active_dampers = true;
+        *_increment_vec = update;
+        ComputeNodalDampingThread cndt(_fe_problem);
+        Threads::parallel_reduce(*_mesh.getLocalNodeRange(), cndt);
+        damping = std::min(cndt.damping(), damping);
+      }
+      PARALLEL_CATCH;
+    }
+
+    if (_general_dampers.hasActiveObjects())
+    {
+      PARALLEL_TRY
+      {
+        TIME_SECTION(_compute_dampers_timer);
+
+        has_active_dampers = true;
+        const auto & gdampers = _general_dampers.getActiveObjects();
+        for (const auto & damper : gdampers)
+        {
+          Real gd_damping = damper->computeDamping(solution, update);
+          try
+          {
+            damper->checkMinDamping(gd_damping);
+          }
+          catch (MooseException & e)
+          {
+            _fe_problem.setException(e.what());
+          }
+          damping = std::min(gd_damping, damping);
+        }
+      }
+      PARALLEL_CATCH;
+    }
+  }
+  catch (MooseException & e)
+  {
+    // The buck stops here, we have already handled the exception by
+    // calling stopSolve(), it is now up to PETSc to return a
+    // "diverged" reason during the next solve.
   }
 
   _communicator.min(damping);
@@ -3102,6 +3112,12 @@ NonlinearSystemBase::needBoundaryMaterialOnSide(BoundaryID bnd_id, THREAD_ID tid
   return _integrated_bcs.hasActiveBoundaryObjects(bnd_id, tid);
 }
 
+bool
+NonlinearSystemBase::needInterfaceMaterialOnSide(BoundaryID bnd_id, THREAD_ID tid) const
+{
+  return _interface_kernels.hasActiveBoundaryObjects(bnd_id, tid);
+}
+
 bool NonlinearSystemBase::needSubdomainMaterialOnSide(SubdomainID /*subdomain_id*/,
                                                       THREAD_ID /*tid*/) const
 {
@@ -3184,115 +3200,8 @@ NonlinearSystemBase::mortarJacobianConstraints(bool displaced)
 }
 
 void
-NonlinearSystemBase::computeScalingJacobian(NonlinearImplicitSystem & sys)
+NonlinearSystemBase::computeScalingJacobian()
 {
-#ifdef LIBMESH_HAVE_PETSC
-
-  if (dynamic_cast<PetscMatrix<Real> *>(sys.matrix))
-  {
-#if !PETSC_VERSION_LESS_THAN(3, 9, 0)
-    _console << "\nPerforming automatic scaling calculation\n\n";
-
-    TIME_SECTION(_compute_scaling_jacobian_timer);
-
-    auto & petsc_matrix = *static_cast<PetscMatrix<Real> *>(sys.matrix);
-
-    if (!petsc_matrix.local_m())
-      mooseError("MOOSE doesn't currently support automatic scaling when there are any processes "
-                 "owning zero dofs. Check back soon :-)");
-
-    _computing_initial_jacobian = true;
-    _fe_problem.computeJacobianSys(sys, *_current_solution, *sys.matrix);
-    _computing_initial_jacobian = false;
-
-    // container for repeated access of element global dof indices
-    std::vector<dof_id_type> dof_indices;
-
-    auto & field_variables = _vars[0].fieldVariables();
-    auto & scalar_variables = _vars[0].scalars();
-
-    std::vector<Real> inverse_scaling_factors(field_variables.size() + scalar_variables.size(), 0);
-    auto & dof_map = dofMap();
-
-    // limit dereferencing
-    auto & diagonal = *_pmat_diagonal;
-
-    // fill our diagonal vector
-    petsc_matrix.get_diagonal(diagonal);
-
-    // Compute our scaling factors for the spatial field variables
-    for (const auto & elem : *mesh().getActiveLocalElementRange())
-    {
-      for (MooseIndex(field_variables) i = 0; i < field_variables.size(); ++i)
-      {
-        auto & field_variable = *field_variables[i];
-        dof_map.dof_indices(elem, dof_indices, field_variable.number());
-        for (auto dof_index : dof_indices)
-          if (dof_map.local_index(dof_index))
-          {
-            // For now we will use the diagonal for determining scaling
-            auto mat_value = diagonal(dof_index);
-            inverse_scaling_factors[i] = std::max(inverse_scaling_factors[i], std::abs(mat_value));
-          }
-      }
-    }
-
-    auto offset = field_variables.size();
-
-    // Compute scalar factors for scalar variables
-    for (MooseIndex(scalar_variables) i = 0; i < scalar_variables.size(); ++i)
-    {
-      auto & scalar_variable = *scalar_variables[i];
-      dof_map.SCALAR_dof_indices(dof_indices, scalar_variable.number());
-      for (auto dof_index : dof_indices)
-        if (dof_map.local_index(dof_index))
-        {
-          // For now we will use the diagonal for determining scaling
-          auto mat_value = diagonal(dof_index);
-          inverse_scaling_factors[offset + i] =
-              std::max(inverse_scaling_factors[offset + i], std::abs(mat_value));
-        }
-    }
-
-    // Get the maximum value across processes
-    _communicator.max(inverse_scaling_factors);
-
-    // We have to make sure that our scaling values are not zero
-    for (auto & scaling_factor : inverse_scaling_factors)
-      if (scaling_factor < std::numeric_limits<Real>::epsilon())
-        scaling_factor = 1;
-
-    if (_verbose)
-    {
-      _console << "Automatic scaling factors:\n";
-      for (MooseIndex(field_variables) i = 0; i < field_variables.size(); ++i)
-      {
-        auto & field_variable = *field_variables[i];
-        _console << "  " << field_variable.name() << ": " << 1.0 / inverse_scaling_factors[i]
-                 << "\n";
-      }
-      for (MooseIndex(scalar_variables) i = 0; i < scalar_variables.size(); ++i)
-      {
-        auto & scalar_variable = *scalar_variables[i];
-        _console << "  " << scalar_variable.name() << ": "
-                 << 1.0 / inverse_scaling_factors[offset + i] << "\n";
-      }
-      _console << "\n\n";
-    }
-
-    // Now set the scaling factors for the variables
-    applyScalingFactors(inverse_scaling_factors);
-    if (auto displaced_problem = _fe_problem.getDisplacedProblem().get())
-      displaced_problem->systemBaseNonlinear().applyScalingFactors(inverse_scaling_factors);
-
-    // Now it's essential that we reset the sparsity pattern of the matrix
-    petsc_matrix.reset_preallocation();
-
-#else
-    mooseWarning("Automatic scaling requires a PETSc version of 3.9.0 or greater, so no automatic "
-                 "scaling is going to be performed");
-#endif
-  }
-
-#endif
+  mooseWarning("The NonlinearSystemBase derived class that is being used does not currently "
+               "support automatic scaling.");
 }

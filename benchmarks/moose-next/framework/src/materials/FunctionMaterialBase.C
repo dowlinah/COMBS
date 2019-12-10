@@ -9,11 +9,13 @@
 
 #include "FunctionMaterialBase.h"
 
-template <>
+defineLegacyParams(FunctionMaterialBase);
+
 InputParameters
-validParams<FunctionMaterialBase>()
+FunctionMaterialBase::validParams()
 {
-  InputParameters params = validParams<Material>();
+
+  InputParameters params = Material::validParams();
   params.addClassDescription("Material to provide a function (such as a free energy)");
   params.addParam<std::string>(
       "f_name",
@@ -63,6 +65,10 @@ FunctionMaterialBase::FunctionMaterialBase(const InputParameters & parameters)
       _arg_names.push_back(vars->second[j]->name());
       _arg_numbers.push_back(number);
       _arg_param_names.push_back(*it);
+      if (_mapping_is_unique)
+        _arg_param_numbers.push_back(-1);
+      else
+        _arg_param_numbers.push_back(j);
 
       // populate number -> arg index lookup table
       unsigned int idx = libMeshVarNumberRemap(number);

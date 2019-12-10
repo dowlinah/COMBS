@@ -31,6 +31,8 @@ InputParameters validParams<RelationshipManager>();
 class RelationshipManager : public MooseObject, public libMesh::GhostingFunctor
 {
 public:
+  static InputParameters validParams();
+
   RelationshipManager(const InputParameters & parameters);
 
   /**

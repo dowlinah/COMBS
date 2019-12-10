@@ -18,7 +18,7 @@
 
 registerMooseObjectReplaced("MooseApp",
                             ParsedAddSideset,
-                            "08/12/2019 00:00",
+                            "11/30/2019 00:00",
                             ParsedGenerateSideset);
 
 template <>
@@ -63,7 +63,7 @@ ParsedAddSideset::ParsedAddSideset(const InputParameters & parameters)
     _normal(getParam<Point>("normal"))
 {
   // base function object
-  _func_F = ADFunctionPtr(new ADFunction());
+  _func_F = std::make_shared<ADFunction>();
 
   // set FParser internal feature flags
   setParserFeatureFlags(_func_F);

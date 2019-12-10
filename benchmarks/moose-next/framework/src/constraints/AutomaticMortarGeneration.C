@@ -1,3 +1,12 @@
+//* This file is part of the MOOSE framework
+//* https://www.mooseframework.org
+//*
+//* All rights reserved, see COPYRIGHT for full restrictions
+//* https://github.com/idaholab/moose/blob/master/COPYRIGHT
+//*
+//* Licensed under LGPL 2.1, please see LICENSE for details
+//* https://www.gnu.org/licenses/lgpl-2.1.html
+
 #include "AutomaticMortarGeneration.h"
 #include "MortarSegmentInfo.h"
 #include "NanoflannMeshAdaptor.h"
@@ -18,6 +27,8 @@
 #include "libmesh/quadrature_trap.h"
 
 #include "metaphysicl/dualnumber.h"
+
+#include <array>
 
 using namespace libMesh;
 using MetaPhysicL::DualNumber;
@@ -129,6 +140,7 @@ AutomaticMortarGeneration::buildMortarSegmentMesh()
       new_elem = mortar_segment_mesh.add_elem(new Edge2);
 
     new_elem->processor_id() = slave_elem->processor_id();
+    new_elem->set_interior_parent(const_cast<Elem *>(slave_elem->interior_parent()));
 
     for (MooseIndex(new_elem->n_nodes()) n = 0; n < new_elem->n_nodes(); ++n)
       new_elem->set_node(n) = new_nodes[n];
@@ -207,12 +219,16 @@ AutomaticMortarGeneration::buildMortarSegmentMesh()
     Elem * current_mortar_segment = nullptr;
     for (const auto & mortar_segment_candidate : mortar_segment_set)
     {
-      // Test whether new_pt lies in the element by checking
-      // whether the sum of the distances from the endpoints to
-      // the new point is approximately equal to the distance
-      // between the endpoints.
-      Point a = mortar_segment_candidate->point(0), b = mortar_segment_candidate->point(1);
-      if (std::abs((a - new_pt).norm() + (b - new_pt).norm() - (b - a).norm()) < TOLERANCE)
+      MortarSegmentInfo * info;
+      try
+      {
+        info = &msm_elem_to_info.at(mortar_segment_candidate);
+      }
+      catch (std::out_of_range &)
+      {
+        mooseError("MortarSegmentInfo not found for the mortar segment candidate");
+      }
+      if (info->xi1_a < xi1 && xi1 < info->xi1_b)
       {
         current_mortar_segment = mortar_segment_candidate;
         break;
@@ -232,6 +248,7 @@ AutomaticMortarGeneration::buildMortarSegmentMesh()
     else
       new_elem_left = mortar_segment_mesh.add_elem(new Edge2);
     new_elem_left->processor_id() = current_mortar_segment->processor_id();
+    new_elem_left->set_interior_parent(current_mortar_segment->interior_parent());
     new_elem_left->set_node(0) = current_mortar_segment->node_ptr(0);
     new_elem_left->set_node(1) = new_node;
 
@@ -260,6 +277,7 @@ AutomaticMortarGeneration::buildMortarSegmentMesh()
     else
       new_elem_right = mortar_segment_mesh.add_elem(new Edge2);
     new_elem_right->processor_id() = current_mortar_segment->processor_id();
+    new_elem_right->set_interior_parent(current_mortar_segment->interior_parent());
     new_elem_right->set_node(0) = new_node;
     new_elem_right->set_node(1) = current_mortar_segment->node_ptr(1);
 

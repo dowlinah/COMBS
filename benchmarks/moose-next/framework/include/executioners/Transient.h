@@ -36,6 +36,8 @@ public:
    * @param parameters The parameters object holding data for the class to use.
    * @return Whether or not the solve was successful.
    */
+  static InputParameters validParams();
+
   Transient(const InputParameters & parameters);
 
   virtual void init() override;
@@ -231,8 +233,6 @@ protected:
   bool _steady_state_detection;
   Real _steady_state_tolerance;
   Real _steady_state_start_time;
-  Real & _sln_diff_norm;
-  Real & _old_time_solution_norm;
 
   std::set<Real> & _sync_times;
 
@@ -248,7 +248,7 @@ protected:
   Real & _target_time;
   bool _use_multiapp_dt;
 
-  Real _solution_change_norm;
+  Real & _solution_change_norm;
 
   /// The difference of current and old solutions
   NumericVector<Number> & _sln_diff;

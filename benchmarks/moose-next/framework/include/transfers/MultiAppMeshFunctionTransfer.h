@@ -26,6 +26,8 @@ InputParameters validParams<MultiAppMeshFunctionTransfer>();
 class MultiAppMeshFunctionTransfer : public MultiAppFieldTransfer
 {
 public:
+  static InputParameters validParams();
+
   MultiAppMeshFunctionTransfer(const InputParameters & parameters);
 
   virtual void execute() override;
@@ -48,4 +50,3 @@ private:
   /// To send app ids to other processors
   std::vector<std::vector<Parallel::Request>> _send_ids;
 };
-

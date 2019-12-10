@@ -24,11 +24,14 @@
 
 registerMooseObject("MooseApp", MultiAppNearestNodeTransfer);
 
-template <>
+defineLegacyParams(MultiAppNearestNodeTransfer);
+
 InputParameters
-validParams<MultiAppNearestNodeTransfer>()
+MultiAppNearestNodeTransfer::validParams()
 {
-  InputParameters params = validParams<MultiAppFieldTransfer>();
+  InputParameters params = MultiAppFieldTransfer::validParams();
+  params.addClassDescription(
+      "Transfer the value to the target domain from the nearest node in the source domain.");
 
   params.addParam<BoundaryName>(
       "source_boundary",
@@ -483,7 +486,7 @@ MultiAppNearestNodeTransfer::execute()
     unsigned int var_num = to_sys->variable_number(_to_var_name);
 
     NumericVector<Real> * solution = nullptr;
-    switch (_direction)
+    switch (_current_direction)
     {
       case TO_MULTIAPP:
         solution = &getTransferVector(i_to, _to_var_name);

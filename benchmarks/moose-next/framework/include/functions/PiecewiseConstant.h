@@ -24,6 +24,8 @@ InputParameters validParams<PiecewiseConstant>();
 class PiecewiseConstant : public Piecewise
 {
 public:
+  static InputParameters validParams();
+
   PiecewiseConstant(const InputParameters & parameters);
 
   /**
