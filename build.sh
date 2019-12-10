@@ -37,4 +37,8 @@ make
 cd ..
 cd ks-pde
 make
+cd ..
+cd moose-next/examples
+make
+cd ..
 cd ../..
