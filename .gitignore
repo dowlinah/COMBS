@@ -1,1 +1,2 @@
-.DS_Store
+#exclude moose
+/benchmarks/moose-next/*
