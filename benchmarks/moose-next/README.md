@@ -55,12 +55,15 @@ sudo apt-get install
   liblzma-dev
   
   Modify your Bash Profile
+  
   echo "module load moose-dev-gcc" >> ~/.bash_profile
   
   Compile libMesh
+  
   ./scripts/update_and_rebuild_libmesh.sh
   
   Compile and Test MOOSE
+  
   cd test
   make -j Num_Threads
   ./run_tests - Num_Threads
