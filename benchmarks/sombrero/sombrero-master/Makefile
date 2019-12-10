@@ -12,6 +12,8 @@ default:
 	$(MAKE) sombrero/sombrero5
 	$(MAKE) sombrero/sombrero6
 
+bench:
+	./bench.sh
 
 include $(MKDIR)/MkRules
 

@@ -22,5 +22,8 @@ mpi: mpi-2dheat.o
 mpi-2dheat.o: mpi-2dheat.c 
 	$(MPICC) -c mpi-2dheat.c $(CFLAGS)
 
+bench: serial-2dheat.o
+	./bench.sh
+
 clean:
-	rm -rf *.o *.x 
+	rm -rf *.o *.x callgrind* time.txt mem.txt massif.out
