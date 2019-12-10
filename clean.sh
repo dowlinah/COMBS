@@ -16,6 +16,18 @@ make clean
 cd ..
 cd hpcg
 ./clean.sh
+cd 2d-heat
+make clean
+cd ..
+cd sombrero/sombrero-master
+make clean
+cd ../..
+cd fidibench
+./build/make clean
+./clean.sh
+cd ..
+cd radix_sort
+make clean
 cd ../..
 
 

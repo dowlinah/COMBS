@@ -16,6 +16,18 @@ make bench
 cd ..
 cd hpcg
 ./bench.sh
+cd 2d-heat
+make bench
+cd ..
+cd sombrero/sombrero-master
+make bench
+cd ../..
+cd fidibench
+make bench
+cd ..
+cd radix_sort
+make bench
+cd ..
 cd ../..
 
 ./getData.py | tee ./results.txt

@@ -12,5 +12,4 @@ library_sort:
 	./standard_sort.x 256 10000
 
 clean:
-	rm -rf *.x
-	
+	rm -rf *.o *.x callgrind* time.txt mem.txt massif.out
