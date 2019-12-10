@@ -6,4 +6,4 @@ bench: all
 
 clean:
 	$(MAKE) clean -C FFTW
-	rm -f time.txt callgrind.out*
+	rm -f time.txt callgrind.out* massif.out mem.txt

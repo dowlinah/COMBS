@@ -12,11 +12,8 @@ default:
 	$(MAKE) sombrero/sombrero5
 	$(MAKE) sombrero/sombrero6
 
-include $(MKDIR)/MkRules
-
 bench:
 	./bench.sh
 
-clean:
-        rm -rf *.o *.x callgrind* time.txt mem.txt massif.out
+include $(MKDIR)/MkRules
 

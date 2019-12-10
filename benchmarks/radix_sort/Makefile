@@ -10,6 +10,7 @@ slow:
 library_sort:
 	g++ -o standard_sort.x standard_sort.c -O3
 	./standard_sort.x 256 10000
-
+bench:
+	./bench.sh
 clean:
 	rm -rf *.o *.x callgrind* time.txt mem.txt massif.out
