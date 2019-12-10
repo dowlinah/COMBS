@@ -86,8 +86,13 @@ for benchmark in data:
 headers = ["Benchmark", "Time(s)", "Instruction Count", "Max Memory Usage(B)"]
 
 with open('output.tex','w') as ofh:
-    ofh.write("\\begin{tabular}{|c|c|c|c|}\n\\hline\n")
-    ofh.write("\t%s \\\\ \hline \n" % (" & ".join(headers) ) )
+    ofh.write("\\begin{tabular}{|c|r|r|r|}\n\\hline\n")
+    ofh.write("\t%s \\\\ \hline \n" % 
+            (" & ".join(
+                    [ "\\textbf{%s}"%(x) for x in headers ]
+                ) 
+            ) 
+    )
     for benchmark in data:
         finalSeconds = (float(
             data[benchmark]['minutes'])*60
@@ -110,4 +115,23 @@ with open('output.tex','w') as ofh:
         )
 
     ofh.write("\\end{tabular}\n")
+
+with open('output.csv','w') as ofh:
+    ofh.write("%s\n"%(",".join(headers)))
+    for benchmark in data:
+        finalSeconds = (float(
+            data[benchmark]['minutes'])*60
+            )+float(data[benchmark]['seconds'])
+        ofh.write(
+            "%s\n"%(",".join(
+                [
+                    str(x) for x in [
+                    benchmark,
+                    finalSeconds,
+                    data[benchmark]['instructions'],
+                    data[benchmark]['memory']
+                ]]
+            )
+            )
+        )
 
