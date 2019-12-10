@@ -5,11 +5,18 @@ import os
 
 base = 'benchmarks'
 folders = [ 
-        "lid-driven-cavity"
-#        ,"matrix-mpi"
-#        ,"phase-retrieval-benchmarks"
-#        ,"FourierBenchmarks"
-#        ,"hpcg" 
+        "2d-heat"
+        ,"FourierBenchmarks"
+        ,"advection-diffusion"
+        ,"fidibench"
+        ,"hpcg" 
+        ,"ks-pde"
+        ,"lid-driven-cavity"
+        ,"matrix-mpi"
+        ,"monte-carlo"
+        ,"phase-retrieval-benchmarks"
+        ,"radix_sort"
+        ,"sombrero"
         ]
 
 metaData = ['minutes','seconds','instructions','memory']
