@@ -25,6 +25,7 @@ data = dict()
 for folder in folders:
     path = base + "/" + folder + "/"
     files = os.listdir(path)
+    print(folder)
    
     # GET TIMING DATA ###############################################
     if not 'time.txt' in files:
@@ -91,10 +92,17 @@ with open('output.tex','w') as ofh:
         finalSeconds = (float(
             data[benchmark]['minutes'])*60
             )+float(data[benchmark]['seconds'])
-        
+
+        cleaned_benchmark = ""
+        for letter in benchmark:
+            if letter == "_":
+                cleaned_benchmark += "\_"
+            else:
+                cleaned_benchmark += letter
+
         ofh.write(
             "\t%s & %s & %s & %s \\\\ \\hline \n" % (
-                benchmark,
+                cleaned_benchmark,
                 finalSeconds,
                 data[benchmark]['instructions'],
                 data[benchmark]['memory']
