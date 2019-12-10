@@ -75,28 +75,39 @@ for folder in folders:
     data[folder] = dict()
     data[folder]['minutes'] = minutes
     data[folder]['seconds'] = seconds
-    data[folder]['instructions'] = count
-    data[folder]['memory'] = memRaw[0].split('\n')[0]
+    data[folder]['instructions'] = (float(count))
+    data[folder]['memory'] = (float(memRaw[0].split('\n')[0])/1024.0)
 
 for benchmark in data:
     for header in metaData:
         print("%s\t%s\t%s" % (benchmark,header,data[benchmark][header]))
 
 # output latex table
-headers = ["Benchmark", "Time(s)", "Instruction Count", "Max Memory Usage(B)"]
+headers = ["Benchmark", "Time(s)", "Instruction Count/Million", "Max Memory Usage(kB)","IPS"]
 
-with open('output.tex','w') as ofh:
-    ofh.write("\\begin{tabular}{|c|r|r|r|}\n\\hline\n")
+"""
     ofh.write("\t%s \\\\ \hline \n" % 
             (" & ".join(
                     [ "\\textbf{%s}"%(x) for x in headers ]
                 ) 
             ) 
     )
+"""
+
+with open('output.tex','w') as ofh:
+    ofh.write("\\begin{tabular}{l|r|r|r|r}\n")
+
+    ofh.write("\t & & \multicolumn{1}{|c|}{Instruction} & \multicolumn{1}{|c|}{Max Memory} & \\\\ \n")
+    ofh.write("\t Benchmark & \multicolumn{1}{|c|}{Time(s)} & \multicolumn{1}{|c|}{Count(Millions)} & \multicolumn{1}{|c|}{Usage(kB)} & \multicolumn{1}{|c}{IPS} \\\\ \hline \n")
+
     for benchmark in data:
         finalSeconds = (float(
             data[benchmark]['minutes'])*60
             )+float(data[benchmark]['seconds'])
+
+        data[benchmark]['ips'] = (
+                float(
+                    data[benchmark]['instructions'])/finalSeconds)
 
         cleaned_benchmark = ""
         for letter in benchmark:
@@ -106,11 +117,12 @@ with open('output.tex','w') as ofh:
                 cleaned_benchmark += letter
 
         ofh.write(
-            "\t%s & %s & %s & %s \\\\ \\hline \n" % (
+            "\t%s & %.3f & %.3f & %d & %.0f \\\\ \n" % (
                 cleaned_benchmark,
                 finalSeconds,
-                data[benchmark]['instructions'],
-                data[benchmark]['memory']
+                float(data[benchmark]['instructions'])/1000000.0,
+                data[benchmark]['memory'],
+                data[benchmark]['ips']
             )
         )
 
@@ -129,7 +141,8 @@ with open('output.csv','w') as ofh:
                     benchmark,
                     finalSeconds,
                     data[benchmark]['instructions'],
-                    data[benchmark]['memory']
+                    data[benchmark]['memory'],
+                    data[benchmark]['ips']
                 ]]
             )
             )
