@@ -18,6 +18,13 @@ Some of the capability at your fingertips:
 * Flexible, plugable graphical user interface
 * ~30 plugable interfaces allow specialization of every part of the solve
 
+SETUP
+=====
+Setup in the moose-next folder instead of /projects/src
+https://mooseframework.inl.gov/old/wiki/BasicManualInstallation/Linux/
+
+https://www.mooseframework.org/getting_started/installation/ubuntu.html
+
 More Information
 ================
 
