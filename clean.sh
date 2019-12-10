@@ -16,6 +16,15 @@ make clean
 cd ..
 cd hpcg
 ./clean.sh
+cd ..
+cd monte-carlo
+./clean.sh
+cd ..
+cd advection-diffusion
+./clean.sh
+cd ..
+cd ks-pde
+make clean
 cd ../..
 
 

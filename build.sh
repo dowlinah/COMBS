@@ -19,4 +19,10 @@ cd hpcg
 cd ..
 cd monte-carlo
 ./build.sh
+cd ..
+cd advection-diffusion
+make
+cd ..
+cd ks-pde
+make
 cd ../..
