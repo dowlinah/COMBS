@@ -26,4 +26,4 @@ bench: serial-2dheat.o
 	./bench.sh
 
 clean:
-	rm -rf *.o *.x callgrind* time.txt mem.txt massif.out
+	rm -rf *.o *.x callgrind* time.txt mem.txt massif.out ../callgrind.out* ../time.txt ../mem.txt
