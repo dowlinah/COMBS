@@ -34,7 +34,8 @@ make install
 SETUP MOOSE
 =============
 Prerequisites
-sudo apt-get install build-essential \
+sudo apt-get install 
+  build-essential \
   gfortran \
   tcl \
   git \
