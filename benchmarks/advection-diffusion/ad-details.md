@@ -10,7 +10,7 @@ of advection-diffusion can be useful in measuring simulation performance.
 ## Compiling and running the benchmark
 Compile:
 ```
-clang -O3 -o heat-c heat.c
+clang -O3 -o heat-c heat.c -lm
 ```
 Run:
 ```
