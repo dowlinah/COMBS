@@ -2,31 +2,41 @@
 
 cd benchmarks
 
-cd matrix-mpi
+cd 2d-heat/src
+make bench
+cd ../..
+cd FourierBenchmarks
 make bench
 cd ..
-cd phase-retrieval-benchmarks
+cd advection-diffusion
+make bench
+cd ..
+cd fidibench
+./bench.sh
+cd ..
+cd hpcg
+./bench.sh
+cd ..
+cd ks-pde
 make bench
 cd ..
 cd lid-driven-cavity
 make bench
 cd ..
-cd FourierBenchmarks
+cd matrix-mpi
 make bench
 cd ..
-cd hpcg
+cd monte-carlo
 ./bench.sh
 cd ..
-cd 2d-heat/src
+cd phase-retrieval-benchmarks
 make bench
-cd ../..
-cd sombrero/sombrero-master
-make bench
-cd ../..
-cd fidibench
-./bench.sh
 cd ..
 cd radix_sort
 make bench
+cd sombrero/sombrero-master
+make bench
+cd ../..
+
 cd ../..
 ./getData.py | tee ./results.txt
