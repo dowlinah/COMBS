@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # installs dependencies for the suite
 
 # tools
