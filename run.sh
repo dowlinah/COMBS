@@ -27,16 +27,17 @@ cd matrix-mpi
 make bench
 cd ..
 cd monte-carlo
-./bench.sh
+./bench.sh ./optimized.x
 cd ..
 cd phase-retrieval-benchmarks
 make bench
 cd ..
 cd radix_sort
 make bench
+cd ..
 cd sombrero/sombrero-master
 make bench
 cd ../..
 
-cd ../..
+cd ..
 ./getData.py | tee ./results.txt
