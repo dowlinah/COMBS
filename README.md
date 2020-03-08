@@ -1,5 +1,23 @@
 # COMBS: Clarkson Open-Source Multi-Physics Benchmark Suite
 
+## Authors:
+
+Frank Swiatowicz<sup>1</sup>, Anthony Dowling<sup>2</sup>Dr. Yu Liu<sup>3</sup>, Alexander John Tolai<sup>4</sup>, Fabian Herbert Engel<sup>5</sup>
+
+<sup>1</sup> Department of Computer Science, Vassar College
+fxswiatowics@vassar.edu
+<sup>2</sup> Deparment of Computer Science, Clarkson University
+dowlinah@clarkson.edu
+<sup>3</sup> Department of Electrical and Computer Engineering, Clarkson University
+yuliu@clarkson.edu
+<sup>4</sup> Royal Melbourne Institute of Technology
+s3540645@student.rmit.edu.au
+<sup>5</sup> Hasso Plattner Institute
+fabian.engel@student.hpi.de
+
+
+## Overview:
+
 COMBS is an open-source multi-physics benchmark suite. This
 suite draws on an assortment of open-source high performance
 computing benchmarks, and aggregates them into one unified
