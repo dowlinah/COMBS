@@ -2,7 +2,7 @@
 
 ## Authors:
 
-Frank Swiatowicz<sup>1</sup>, Anthony Dowling<sup>2</sup>Dr. Yu Liu<sup>3</sup>, Alexander John Tolai<sup>4</sup>, Fabian Herbert Engel<sup>5</sup>
+Frank Swiatowicz<sup>1</sup>, Anthony Dowling<sup>2</sup>, Dr. Yu Liu<sup>3</sup>, Alexander John Tolai<sup>4</sup>, Fabian Herbert Engel<sup>5</sup>
 
 <sup>1</sup> Department of Computer Science, Vassar College
 fxswiatowics@vassar.edu
