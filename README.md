@@ -2,12 +2,12 @@
 
 ## Authors:
 
-Frank Swiatowicz<sup>1</sup>, Anthony Dowling<sup>2</sup>, Dr. Yu Liu<sup>3</sup>, Alexander John Tolai<sup>4</sup>, Fabian Herbert Engel<sup>5</sup>
+Anthony Dowling<sup>1</sup>, Frank Swiatowicz<sup>2</sup>, Dr. Yu Liu<sup>3</sup>, Alexander John Tolai<sup>4</sup>, Fabian Herbert Engel<sup>5</sup>
 
-<sup>1</sup> Department of Computer Science, Vassar College
-fxswiatowics@vassar.edu
-<sup>2</sup> Deparment of Computer Science, Clarkson University
+<sup>1</sup> Deparment of Computer Science, Clarkson University
 dowlinah@clarkson.edu
+<sup>2</sup> Department of Computer Science, Vassar College
+fxswiatowics@vassar.edu
 <sup>3</sup> Department of Electrical and Computer Engineering, Clarkson University
 yuliu@clarkson.edu
 <sup>4</sup> Royal Melbourne Institute of Technology
