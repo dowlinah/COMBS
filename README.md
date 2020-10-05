@@ -15,7 +15,7 @@ s3540645@student.rmit.edu.au
 <sup>5</sup> Hasso Plattner Institute
 fabian.engel@student.hpi.de
 
-#### Please Cite this paper as below if you use this benchmark suite for your research:
+#### Please Cite as below:
 
 Dowling A., Swiatowicz F., Liu Y., Tolnai A.J., Engel F.H. (2020) COMBS: First Open-Source Based Benchmark Suite for Multi-physics Simulation Relevant HPC Research. In: Qiu M. (eds) Algorithms and Architectures for Parallel Processing. ICA3PP 2020. Lecture Notes in Computer Science, vol 12452. Springer, Cham. https://doi.org/10.1007/978-3-030-60245-1_1
 
